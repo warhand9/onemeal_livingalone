@@ -1,4 +1,4 @@
 
-public class AdminAccount {
+public class AdminAccount extends Account{
 
 }
