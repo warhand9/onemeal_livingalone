@@ -1,7 +1,7 @@
 // 2017 PhoneSajo
 package org.onemeallivingalone.account.ui;
 
-import org.onemeallivingalone.account.CustomerAccount;
+import org.onemeallivingalone.account.UserAccount;
 import org.onemeallivingalone.center.CurrentUser;
 import org.onemeallivingalone.center.ui.ManagerUI;
 
@@ -12,7 +12,7 @@ import org.onemeallivingalone.center.ui.ManagerUI;
 */
 public class CustomerAccountMenuManagerUI extends ManagerUI{
 	
-	CustomerAccount custom;
+	UserAccount custom;
 	
 	public void interact()
 	{
@@ -23,13 +23,13 @@ public class CustomerAccountMenuManagerUI extends ManagerUI{
 			System.out.println("구매자 전용 기능입니다.");
 			return;
 		}
-		if(!(CurrentUser.get() instanceof CustomerAccount))
+		if(!(CurrentUser.get() instanceof UserAccount))
 		{
 			System.out.println("구매자 계정으로 로그인 하십시오.");
 			return;
 		}
 		
-		custom = (CustomerAccount)CurrentUser.get();
+		custom = (UserAccount)CurrentUser.get();
 		while(true)
 		{
 			System.out.print("1. Change Passward\n");
