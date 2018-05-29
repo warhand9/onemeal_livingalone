@@ -44,9 +44,9 @@ public class CustomerAccount extends Account {
 	{}
 	
 	
-	public void addPeronsalFood()
+	public void addPeronsalFavoriteFood(Integer foodID)
 	{}
-	public void deletePersonalFood()
+	public void deletePersonalFavoriteFood()
 	{}
 	
 	

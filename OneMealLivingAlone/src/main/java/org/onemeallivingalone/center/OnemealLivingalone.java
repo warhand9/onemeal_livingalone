@@ -1,5 +1,7 @@
 package org.onemeallivingalone.center;
 
+import org.onemeallivingalone.center.ui.MainMenuManagerUI;
+
 public class OnemealLivingalone {
 	
 	private static void readRecordsFromFiles()
