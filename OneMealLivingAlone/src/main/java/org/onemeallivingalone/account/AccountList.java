@@ -3,8 +3,6 @@ package org.onemeallivingalone.account;
 import java.util.Collection;
 import java.util.HashMap;
 
-/** 파일로부터 읽어들인 Account 객체들을 보관하는 싱글톤 클래스.
- */
 public class AccountList {
 	
 	/** 싱글톤 홀더 클래스.
