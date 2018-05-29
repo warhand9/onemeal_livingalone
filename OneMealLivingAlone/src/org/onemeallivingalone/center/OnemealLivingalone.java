@@ -1,3 +1,4 @@
+package org.onemeallivingalone.center;
 
 public class OnemealLivingalone {
 	
