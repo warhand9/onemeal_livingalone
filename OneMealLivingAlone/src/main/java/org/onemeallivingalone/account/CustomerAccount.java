@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  * 
  * @see AdminAccount
  */
-public class UserAccount extends Account {
+public class CustomerAccount extends Account {
 
 	private static final String EMAIL_REGEX = "^[_a-zA-Z0-9\\.+-]+@[_a-zA-Z0-9\\.+-]+\\.[a-zA-Z]+$"; /// < 이메일 정규 표현식
 	private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX); /// < 이메일 Pattern 객체
@@ -19,7 +19,7 @@ public class UserAccount extends Account {
 	/**
 	 * 이메일 주소의 유효성을 검사합니다.
 	 * 
-	 * 이메일 주소는 UserAccount.EMAIL_REGEX 에 지정된 정규 표현식에 맞아야 합니다.
+	 * 이메일 주소는 CustomerAccount.EMAIL_REGEX 에 지정된 정규 표현식에 맞아야 합니다.
 	 * 
 	 * @param email
 	 *            이메일 주소
@@ -36,7 +36,7 @@ public class UserAccount extends Account {
 	private List<Integer> personalFavoriteFoods = new ArrayList<Integer>(); /// < 관심 요리 목록
 	private List<Integer> personalFoodReviews = new ArrayList<Integer>(); /// < 요리 리뷰 목록
 
-	public UserAccount(String accountId, String pw, String email) throws IllegalArgumentException {
+	public CustomerAccount(String accountId, String pw, String email) throws IllegalArgumentException {
 		super(accountId, pw);
 		if (!checkEmailValidity(email))
 			throw new IllegalArgumentException();
@@ -86,10 +86,10 @@ public class UserAccount extends Account {
 
 	@Override
 	public boolean equals(Object another) {
-		return another instanceof UserAccount && super.equals(another) && email.equals(((UserAccount) another).email)
-				&& personalIngredients.equals(((UserAccount) another).personalIngredients)
-				&& personalFavoriteFoods.equals(((UserAccount) another).personalFavoriteFoods)
-				&& personalFoodReviews.equals(((UserAccount) another).personalFoodReviews);
+		return another instanceof CustomerAccount && super.equals(another) && email.equals(((CustomerAccount) another).email)
+				&& personalIngredients.equals(((CustomerAccount) another).personalIngredients)
+				&& personalFavoriteFoods.equals(((CustomerAccount) another).personalFavoriteFoods)
+				&& personalFoodReviews.equals(((CustomerAccount) another).personalFoodReviews);
 	}
 
 	public String getEmail() {
