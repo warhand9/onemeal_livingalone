@@ -1,13 +1,13 @@
 package org.onemeallivingalone.account.ui;
 
-import org.onemeallivingalone.account.CustomerAccount;
+import org.onemeallivingalone.account.UserAccount;
 import org.onemeallivingalone.center.ui.ManagerUI;
 
 public class CustomerPasswordChangeManagerUI extends ManagerUI{
 	
-	CustomerAccount custom = null;
+	UserAccount custom = null;
 	
-	public CustomerPasswordChangeManagerUI(CustomerAccount custom)
+	public CustomerPasswordChangeManagerUI(UserAccount custom)
 	{
 		this.custom = custom;
 	}

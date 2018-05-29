@@ -2,7 +2,7 @@ package org.onemeallivingalone.account.ui;
 
 import org.onemeallivingalone.account.Account;
 import org.onemeallivingalone.account.AccountList;
-import org.onemeallivingalone.account.CustomerAccount;
+import org.onemeallivingalone.account.UserAccount;
 import org.onemeallivingalone.center.ui.ManagerUI;
 
 public class GetMembershipManagerUI extends ManagerUI{
@@ -12,7 +12,7 @@ public class GetMembershipManagerUI extends ManagerUI{
 	{
 		String accountID="", passward="", email="";
 		String temp1=null, temp2=null;
-		CustomerAccount newcustom;
+		UserAccount newcustom;
 		boolean check = true;
 		boolean run = true;
 		
@@ -45,9 +45,9 @@ public class GetMembershipManagerUI extends ManagerUI{
 			
 			for(Account acc : AccountList.getValues())
 			{
-				if(acc instanceof CustomerAccount)
+				if(acc instanceof UserAccount)
 				{
-					CustomerAccount temp =(CustomerAccount)acc;
+					UserAccount temp =(UserAccount)acc;
 					if(temp.getEmail().equals(email))
 					{
 						System.out.println("중복된 email입니다.!!");
@@ -56,7 +56,7 @@ public class GetMembershipManagerUI extends ManagerUI{
 					}
 				}
 			}
-			if(!CustomerAccount.checkEmailValidity(email))
+			if(!UserAccount.checkEmailValidity(email))
 			{
 				System.out.println("잘못된 email입니다.!!");
 				check = false;
@@ -81,7 +81,7 @@ public class GetMembershipManagerUI extends ManagerUI{
 		}
 		
 		passward = temp1;
-		newcustom = new CustomerAccount(accountID, passward, email);
+		newcustom = new UserAccount(accountID, passward, email);
 		AccountList.put(newcustom);
 		System.out.println("회원가입이 완료되었습니다.\n");
 	}
