@@ -15,8 +15,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
  */
 public class CustomerAccount extends Account {
 
-	private static final String EMAIL_REGEX = "^[_a-zA-Z0-9\\.+-]+@[_a-zA-Z0-9\\.+-]+\\.[a-zA-Z]+$"; /// < 이메일 정규 표현식
-	private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX); /// < 이메일 Pattern 객체
+	private static final String EMAIL_REGEX = "^[_a-zA-Z0-9\\.+-]+@[_a-zA-Z0-9\\.+-]+\\.[a-zA-Z]+$"; ///< 이메일 정규 표현식
+	private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX); ///< 이메일 Pattern 객체
 
 	/**
 	 * 이메일 주소의 유효성을 검사합니다.
@@ -34,14 +34,14 @@ public class CustomerAccount extends Account {
 	}
 
 	private String email; ///< 이메일 주소
-	private List<Integer> personalIngredients; ///< 개인 식재료 목록
-	private List<Integer> personalFavoriteFoods; ///< 관심 요리 목록
-	private List<Integer> personalFoodReviews; ///< 요리 리뷰 목록
+	private final List<Integer> personalIngredients; ///< 개인 식재료 목록
+	private final List<Integer> personalFavoriteFoods; ///< 관심 요리 목록
+	private final List<Integer> personalFoodReviews; ///< 요리 리뷰 목록
 
 	public CustomerAccount(String accountId, String pw, String email) throws IllegalArgumentException {
 		super(accountId, pw);
 		if (!checkEmailValidity(email))
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Invalid customer email");
 		this.email = email;
 		this.personalIngredients = new ArrayList<Integer>();
 		this.personalFavoriteFoods = new ArrayList<Integer>();

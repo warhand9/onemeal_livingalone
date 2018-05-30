@@ -20,18 +20,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class Account {
 
-	private final String accountId; /// < 계정 ID
-	@JsonProperty("password")
-	private String password; /// < 비밀번호
-
-	public Account(String accountId, String password) throws IllegalArgumentException {
-		if (!checkAccountIdValidity(accountId) || !checkPasswordValidity(password)) {
-			throw new IllegalArgumentException();
-		}
-		this.accountId = accountId.toLowerCase();
-		this.password = password;
-	}
-
 	/**
 	 * 계정 ID 기준 오름차순 비교기.
 	 */
@@ -43,7 +31,6 @@ public abstract class Account {
 		}
 
 	}
-
 	/**
 	 * 계정 ID의 유효성을 검사합니다.
 	 * 
@@ -104,6 +91,22 @@ public abstract class Account {
 			return false;
 
 		return true;
+	}
+
+	private final String accountId; /// < 계정 ID
+
+	@JsonProperty("password")
+	private String password; /// < 비밀번호
+
+	public Account(String accountId, String password) throws IllegalArgumentException {
+		if (!checkAccountIdValidity(accountId)) {
+			throw new IllegalArgumentException("Invalid account ID");
+		}
+		if (!checkPasswordValidity(password)) {
+			throw new IllegalArgumentException("Invalid account password");
+		}
+		this.accountId = accountId.toLowerCase();
+		this.password = password;
 	}
 
 	/**
