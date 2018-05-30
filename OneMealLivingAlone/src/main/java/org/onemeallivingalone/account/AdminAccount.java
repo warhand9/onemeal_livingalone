@@ -9,8 +9,8 @@ import org.onemeallivingalone.account.Account;
 */
 public class AdminAccount extends Account {
 
-	public AdminAccount(String accountId, String pw) throws IllegalArgumentException {
-		super(accountId, pw);
+	public AdminAccount(String accountId, String password) throws IllegalArgumentException {
+		super(accountId, password);
 	}
 
 }

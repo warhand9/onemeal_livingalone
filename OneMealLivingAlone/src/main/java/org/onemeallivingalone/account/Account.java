@@ -2,21 +2,34 @@ package org.onemeallivingalone.account;
 
 import java.util.Comparator;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 /**
  * 사용자 계정을 나타내는 추상 클래스.
  * 
  * 계정 ID와 비밀번호를 특성으로 갖고 있습니다.
  */
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonSubTypes({
+		@JsonSubTypes.Type(value = AdminAccount.class, name = "admin"),
+		@JsonSubTypes.Type(value = CustomerAccount.class, name = "customer")
+})
+@JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class Account {
 
-	private final String accountId; ///< 계정 ID
-	private String password; ///< 비밀번호
+	private final String accountId; /// < 계정 ID
+	@JsonProperty("password")
+	private String password; /// < 비밀번호
 
-	public Account(String accountId, String pw) throws IllegalArgumentException {
-		if (!checkAccountIdValidity(accountId) || !checkPasswordValidity(pw))
+	public Account(String accountId, String password) throws IllegalArgumentException {
+		if (!checkAccountIdValidity(accountId) || !checkPasswordValidity(password)) {
 			throw new IllegalArgumentException();
+		}
 		this.accountId = accountId.toLowerCase();
-		this.password = pw;
+		this.password = password;
 	}
 
 	/**
@@ -30,6 +43,7 @@ public abstract class Account {
 		}
 
 	}
+
 	/**
 	 * 계정 ID의 유효성을 검사합니다.
 	 * 
