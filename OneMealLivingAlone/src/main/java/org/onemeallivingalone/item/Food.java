@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Food {
 
 	public static class AverageGradeDescendingComparator implements Comparator<Food> {
@@ -29,17 +32,52 @@ public class Food {
 	private int cookingTime;
 	private String recipe;
 	private int cookingCost = 0;
-	private final List<Integer> ingredients = new ArrayList<Integer>();
+	private final List<Integer> ingredients;
 	private double averageGrade = 0.0;
-	private final List<Integer> reviews = new ArrayList<Integer>();
+	private final List<Integer> reviews;
 
 	public Food(int foodId, String name, int cookingTime, String recipe) {
 		this.foodId = foodId;
 		this.name = name;
 		this.cookingTime = cookingTime;
 		this.recipe = recipe;
+		this.ingredients = new ArrayList<Integer>();
+		this.reviews = new ArrayList<Integer>();
 	}
 
+	@JsonCreator
+	public Food(int foodId, String name, int cookingTime, String recipe, int cookingCost, List<Integer> ingredients,
+			double averageGrade, List<Integer> reviews) {
+		this.foodId = foodId;
+		this.name = name;
+		this.cookingTime = cookingTime;
+		this.recipe = recipe;
+		this.cookingCost = cookingCost;
+		this.ingredients = ingredients;
+		this.averageGrade = averageGrade;
+		this.reviews = reviews;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null || getClass() != obj.getClass()) {
+			return false;
+		}
+		Food other = (Food) obj;
+		return Integer.compare(this.foodId, other.foodId) == 0
+				&& this.name.equals(other.name)
+				&& Integer.compare(this.cookingTime, other.cookingTime) == 0
+				&& this.recipe.equals(other.recipe)
+				&& Integer.compare(this.cookingCost, other.cookingCost) == 0
+				&& this.ingredients.equals(other.ingredients)
+				&& Double.compare(this.averageGrade, other.averageGrade) == 0
+				&& this.reviews.equals(other.reviews);
+	}
+
+	@JsonIgnore
 	public String getDetailedDescription() {
 		// print all information
 		// foodID / name / cookingTime / cookingCost / ingredients / recipe / 평균평점 /
@@ -88,6 +126,7 @@ public class Food {
 		return averageGrade;
 	}
 
+	@JsonIgnore
 	public String getSummaryDescription() {
 		// foodID / name / cookingTime / cookingCost
 		return String.format("%s / %s / 시간: %d 분 / 가격: %d 원 / 점수: %.1lf 점", foodId, name, cookingTime,

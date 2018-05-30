@@ -2,6 +2,8 @@ package org.onemeallivingalone.item;
 
 import java.util.Comparator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Ingredient {
 
 	/**
@@ -20,12 +22,27 @@ public class Ingredient {
 	private String name;
 	private int price;
 
-	public Ingredient(int id, String name, int price) {
-		this.ingredientId = id;
+	public Ingredient(int ingredientId, String name, int price) {
+		this.ingredientId = ingredientId;
 		this.name = name;
 		this.price = price;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null || getClass() != obj.getClass()) {
+			return false;
+		}
+		Ingredient other = (Ingredient) obj;
+		return Integer.compare(this.ingredientId, other.ingredientId) == 0
+				&& this.name.equals(other.name)
+				&& Integer.compare(this.price, other.price) == 0;
+	}
 
+	@JsonIgnore
 	public String getDescription() {
 		return String.format("%s(%d 원)", name, price);
 	}
