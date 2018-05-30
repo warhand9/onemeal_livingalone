@@ -9,6 +9,8 @@ import org.onemeallivingalone.item.FoodList;
 
 public class FoodViewUI extends ManagerUI{
 
+	CustomerAccount cusacnt;
+	
 	@Override
 	public void interact() {
 		int foodID, select;
@@ -16,7 +18,7 @@ public class FoodViewUI extends ManagerUI{
 		System.out.print("보고자하는 요리 번호를 입력하십시오 : ");
 		foodID = scan.nextInt();
 
-		while((food = FoodList.get(foodID))==null)
+		while((food = FoodList.getInstance().get(foodID))==null)
 		{
 			System.out.println("해당 요리가 없습니다.");
 			System.out.print("다시선택하십시오(종료 : -1) : ");
@@ -25,6 +27,7 @@ public class FoodViewUI extends ManagerUI{
 				return;
 		}
 		
+		System.out.println("선택하신 요리의 상세정보입니다.");
 		System.out.println(food.getDetailedDescription());
 		
 		System.out.println("\n관심요리로 추가하시겠습니까(yes:1, no:0) : ");
@@ -44,7 +47,7 @@ public class FoodViewUI extends ManagerUI{
 				return;
 			}
 			
-			CustomerAccount cusacnt = (CustomerAccount)CurrentUser.get();
+			cusacnt = (CustomerAccount)CurrentUser.get();
 			if(cusacnt.getPersonalFavoriteFoods().contains(foodID))
 			{
 				System.out.println("이미 관심 요리 목록에 존재합니다.");
