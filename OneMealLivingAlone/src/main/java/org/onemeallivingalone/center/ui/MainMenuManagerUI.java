@@ -47,7 +47,7 @@ public class MainMenuManagerUI extends ManagerUI {
 				personalIngredientSearch.interact();
 				break;
 			case 5:
-				FavoriteFoodnFoodReviewManagerUI favoriteFoodnReviewMenu = new FavoriteFood_FoodReviewManagerUI();
+				FavoriteFoodnFoodReviewManagerUI favoriteFoodnReviewMenu = new FavoriteFoodnFoodReviewManagerUI();
 				favoriteFoodnReviewMenu.interact();
 				break;
 			case 6:
