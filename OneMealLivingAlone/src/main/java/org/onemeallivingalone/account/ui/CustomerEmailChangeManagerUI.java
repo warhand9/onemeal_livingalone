@@ -1,12 +1,12 @@
 package org.onemeallivingalone.account.ui;
 
-import org.onemeallivingalone.account.UserAccount;
+import org.onemeallivingalone.account.CustomerAccount;
 import org.onemeallivingalone.center.ui.ManagerUI;
 
 public class CustomerEmailChangeManagerUI extends ManagerUI{
-	UserAccount custom = null;
+	CustomerAccount custom = null;
 	
-	public CustomerEmailChangeManagerUI(UserAccount custom) {
+	public CustomerEmailChangeManagerUI(CustomerAccount custom) {
 		this.custom = custom;
 	}
 

@@ -2,8 +2,9 @@ package org.onemeallivingalone.account.ui;
 
 import org.onemeallivingalone.account.Account;
 import org.onemeallivingalone.account.AccountList;
-import org.onemeallivingalone.account.UserAccount;
+import org.onemeallivingalone.account.CustomerAccount;
 import org.onemeallivingalone.center.ui.ManagerUI;
+
 
 public class GetMembershipManagerUI extends ManagerUI{
 	public GetMembershipManagerUI() {}
@@ -12,7 +13,7 @@ public class GetMembershipManagerUI extends ManagerUI{
 	{
 		String accountID="", passward="", email="";
 		String temp1=null, temp2=null;
-		UserAccount newcustom;
+		CustomerAccount newcustom;
 		boolean check = true;
 		boolean run = true;
 		
@@ -45,9 +46,9 @@ public class GetMembershipManagerUI extends ManagerUI{
 			
 			for(Account acc : AccountList.getValues())
 			{
-				if(acc instanceof UserAccount)
+				if(acc instanceof CustomerAccount)
 				{
-					UserAccount temp =(UserAccount)acc;
+					CustomerAccount temp =(CustomerAccount)acc;
 					if(temp.getEmail().equals(email))
 					{
 						System.out.println("중복된 email입니다.!!");
@@ -56,7 +57,7 @@ public class GetMembershipManagerUI extends ManagerUI{
 					}
 				}
 			}
-			if(!UserAccount.checkEmailValidity(email))
+			if(!CustomerAccount.checkEmailValidity(email))
 			{
 				System.out.println("잘못된 email입니다.!!");
 				check = false;
@@ -81,7 +82,7 @@ public class GetMembershipManagerUI extends ManagerUI{
 		}
 		
 		passward = temp1;
-		newcustom = new UserAccount(accountID, passward, email);
+		newcustom = new CustomerAccount(accountID, passward, email);
 		AccountList.put(newcustom);
 		System.out.println("회원가입이 완료되었습니다.\n");
 	}

@@ -6,7 +6,7 @@ import java.util.List;
 import org.onemeallivingalone.account.Account;
 import org.onemeallivingalone.account.AccountList;
 import org.onemeallivingalone.account.AdminAccount;
-import org.onemeallivingalone.account.UserAccount;
+import org.onemeallivingalone.account.CustomerAccount;
 import org.onemeallivingalone.center.CurrentUser;
 import org.onemeallivingalone.center.ui.ManagerUI;
 
@@ -126,9 +126,9 @@ public class SystemAccountManagerUI extends ManagerUI{
 					System.out.printf("%d. accountID : %s (admin)\n", i+1, admin_temp.getAccountId());
 
 				}
-				if(temp instanceof UserAccount)
+				if(temp instanceof CustomerAccount)
 				{
-					UserAccount custom_temp = (UserAccount)temp;
+					CustomerAccount custom_temp = (CustomerAccount)temp;
 					System.out.printf("%d. accountID : %s, email : %s\n", i+1, custom_temp.getAccountId(),custom_temp.getEmail() );
 				}
 			}

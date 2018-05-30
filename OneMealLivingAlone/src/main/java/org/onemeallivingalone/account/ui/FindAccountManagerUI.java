@@ -2,7 +2,7 @@ package org.onemeallivingalone.account.ui;
 
 import org.onemeallivingalone.account.Account;
 import org.onemeallivingalone.account.AccountList;
-import org.onemeallivingalone.account.UserAccount;
+import org.onemeallivingalone.account.CustomerAccount;
 import org.onemeallivingalone.center.ui.ManagerUI;
 
 public class FindAccountManagerUI extends ManagerUI{
@@ -29,9 +29,9 @@ public class FindAccountManagerUI extends ManagerUI{
 				email = scan.next();
 				for(Account acc : AccountList.getValues())
 				{
-					if(acc instanceof UserAccount)
+					if(acc instanceof CustomerAccount)
 					{
-						UserAccount temp = (UserAccount)acc;
+						CustomerAccount temp = (CustomerAccount)acc;
 						if(temp.getEmail().equals(email))
 						{
 							System.out.printf("accountID : %s\n\n", acc.getAccountId());
@@ -50,7 +50,7 @@ public class FindAccountManagerUI extends ManagerUI{
 				email = scan.next();
 				
 				Account acc = AccountList.get(accountID);
-				if(acc instanceof UserAccount && ((UserAccount)acc).getEmail().equals(email))
+				if(acc instanceof CustomerAccount && ((CustomerAccount)acc).getEmail().equals(email))
 					System.out.println("관리자 연락처 : 010-4335-0152\nCall me if you want to find your password.\n");
 				else
 					System.out.println("해당하는 계정이 없습니다!!\n");

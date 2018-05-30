@@ -14,24 +14,24 @@ public class AccountList {
 	/** Account.accountId 문자열을 key로, Account 객체를 value로 하는 HashMap */
 	private final HashMap<String, Account> accounts = new HashMap<String, Account>();
 	
-	public void clear() {
-		accounts.clear();
+	public static void clear() {
+		getInstance().accounts.clear();
 	}
 	
-	public Account get(String accountId) {
-		return accounts.get(accountId);
+	public static Account get(String accountId) {
+		return getInstance().accounts.get(accountId);
 	}
 	
 	private static AccountList getInstance() {
 		return SingletonHolder.INSTANCE;
 	}
 	
-	public Collection<Account> getValues() {
-		return accounts.values();
+	public static Collection<Account> getValues() {
+		return getInstance().accounts.values();
 	}
 	
-	public Account put(Account account) {
-		return accounts.put(account.getAccountId(), account);
+	public static Account put(Account account) {
+		return getInstance().accounts.put(account.getAccountId(), account);
 	}
 	
 	public static Account remove(String accountId) {
