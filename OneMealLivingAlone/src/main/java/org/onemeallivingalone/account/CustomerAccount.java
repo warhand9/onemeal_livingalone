@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 /**
  * 이용자 계정을 나타내는 클래스.
  *
@@ -31,16 +33,29 @@ public class CustomerAccount extends Account {
 		return EMAIL_PATTERN.matcher(email).matches();
 	}
 
-	private String email; /// < 이메일 주소
-	private List<Integer> personalIngredients = new ArrayList<Integer>(); /// < 개인 식재료 목록
-	private List<Integer> personalFavoriteFoods = new ArrayList<Integer>(); /// < 관심 요리 목록
-	private List<Integer> personalFoodReviews = new ArrayList<Integer>(); /// < 요리 리뷰 목록
+	private String email; ///< 이메일 주소
+	private List<Integer> personalIngredients; ///< 개인 식재료 목록
+	private List<Integer> personalFavoriteFoods; ///< 관심 요리 목록
+	private List<Integer> personalFoodReviews; ///< 요리 리뷰 목록
 
 	public CustomerAccount(String accountId, String pw, String email) throws IllegalArgumentException {
 		super(accountId, pw);
 		if (!checkEmailValidity(email))
 			throw new IllegalArgumentException();
 		this.email = email;
+		this.personalIngredients = new ArrayList<Integer>();
+		this.personalFavoriteFoods = new ArrayList<Integer>();
+		this.personalFoodReviews = new ArrayList<Integer>();
+	}
+
+	@JsonCreator
+	public CustomerAccount(String accountId, String password, String email, List<Integer> personalIngredients,
+			List<Integer> personalFavoriteFoods, List<Integer> personalFoodReviews) {
+		super(accountId, password);
+		this.email = email;
+		this.personalIngredients = personalIngredients;
+		this.personalFavoriteFoods = personalFavoriteFoods;
+		this.personalFoodReviews = personalFoodReviews;
 	}
 
 	public void addFoodReview(Integer reviewId) {
@@ -86,7 +101,8 @@ public class CustomerAccount extends Account {
 
 	@Override
 	public boolean equals(Object another) {
-		return another instanceof CustomerAccount && super.equals(another) && email.equals(((CustomerAccount) another).email)
+		return another instanceof CustomerAccount && super.equals(another)
+				&& email.equals(((CustomerAccount) another).email)
 				&& personalIngredients.equals(((CustomerAccount) another).personalIngredients)
 				&& personalFavoriteFoods.equals(((CustomerAccount) another).personalFavoriteFoods)
 				&& personalFoodReviews.equals(((CustomerAccount) another).personalFoodReviews);
