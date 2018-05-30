@@ -39,11 +39,25 @@ public class IngredientList {
 		return ingredients.remove(ingredientId);
 	}
 
-	public Collection<Ingredient> searchByName(String ingredientName) {
+	/*public Collection<Ingredient> searchByName(String ingredientName) {
 		List<Ingredient> result = new ArrayList<>();
 		for (Ingredient ingre : ingredients.values()) {
 			if (ingre.getName().contains(ingredientName)) {
 				result.add(ingre);
+			}
+		}
+		return result;
+	}
+	*/
+	public Ingredient searchByName(String ingredientName)
+	{
+		Ingredient result=null;
+		for(Ingredient ingre : ingredients.values())
+		{
+			if(ingre.getName().equals(ingredientName))
+			{
+				result = ingre;
+				break;
 			}
 		}
 		return result;
