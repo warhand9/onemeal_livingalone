@@ -3,9 +3,11 @@ package org.onemeallivingalone.item;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.TreeMap;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.onemeallivingalone.item.Food;
 import org.onemeallivingalone.item.FoodList;
 
@@ -30,8 +32,9 @@ public class FoodList {
 	}
 
 	public Collection<Food> filteringByIngredients(Collection<Integer> keyIngredients) {
-		TreeMap<Double, Food> foodsByIngredients = new TreeMap<>();
+		List<ImmutablePair<Double, Food>> foodsByIngredientPairs = new ArrayList<>();
 
+		// Search by the factor
 		for (Food food : foods.values()) {
 			Collection<Integer> ingreIds = food.getIngredients();
 			if (!ingreIds.isEmpty()) {
@@ -44,12 +47,21 @@ public class FoodList {
 
 				Double factor = Double.valueOf((double) matched / ingreIds.size());
 				if (factor.compareTo(INGREDIENT_SEARCH_FACTOR) >= 0) {
-					foodsByIngredients.put(factor, food);
+					foodsByIngredientPairs.add(ImmutablePair.of(factor, food));
 				}
 			}
 		}
+		
+		// Sort by the factor in descending order
+		Collections.sort(foodsByIngredientPairs, Comparator.comparing(p -> -p.getKey()));
+		
+		// Convert pairs to a list of foods
+		List<Food> foodsByIngredients = new ArrayList<>();
+		for (ImmutablePair<Double, Food> pair : foodsByIngredientPairs) {
+			foodsByIngredients.add(pair.getValue());
+		}
 
-		return foodsByIngredients.descendingMap().values();
+		return foodsByIngredients;
 	}
 
 	public Collection<Food> filteringByName(String foodName) {
@@ -74,10 +86,6 @@ public class FoodList {
 
 	public Collection<Food> getvalues() {
 		return foods.values();
-	}
-
-	public void printHighGradeFoods() {
-
 	}
 
 	public Food put(Food food) {
