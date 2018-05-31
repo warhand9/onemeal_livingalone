@@ -1,5 +1,6 @@
 package org.onemeallivingalone.item.ui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.onemeallivingalone.account.AdminAccount;
@@ -65,6 +66,12 @@ public class FavoriteFoodnFoodReviewManagerUI extends ManagerUI{
 	{
 		int i;
 		FoodReview selectedFoodReview=null;
+		int grade;
+		String reviewstring;
+		FoodReview foodreview;
+		int lastfoodreviewid;
+		int newfoodreviewid=-1;
+		int choose;
 		
 		System.out.println("요리번호를 입력하십시오. : ");
 		selectedFoodId = scan.nextInt();
@@ -76,7 +83,7 @@ public class FavoriteFoodnFoodReviewManagerUI extends ManagerUI{
 		
 		selectedFood = FoodList.getInstance().get(selectedFoodId);
 		for(i=0; i < selectedFood.getReviews().size(); i++)
-		{
+		{	// 선택한 요리에 대하여 현재 사용자가 작성한 후기 객체 가져옴
 			if(FoodReviewList.getInstance().get(selectedFood.getReviews().get(i)).getUserId().equals(CurrentUser.get().getAccountId()))
 				selectedFoodReview = FoodReviewList.getInstance().get(selectedFood.getReviews().get(i));
 		}
@@ -96,9 +103,29 @@ public class FavoriteFoodnFoodReviewManagerUI extends ManagerUI{
 				System.out.println("이미 후기가 있습니다.");
 				return;
 			}
-			System.out.println("해당 요리의 평점을 입력하십시오. : ");
-			System.out.println("해당 요리의 후기를 작성하십시오. : ");
-			// FoodReviewList에도 추가 시키고, customerAccount의 foodReviewList에도 추가시키고, 해당 Food 객체에도 추가시켜줘야됨
+			System.out.println("해당 요리의 평점을 입력하십시오.(종료:-1) : ");
+			grade = scan.nextInt();
+			if(grade==-1)
+				return;
+			System.out.println("해당 요리의 후기를 작성하십시오.(종료:q or Q) : ");
+			reviewstring = scan.next();
+			if(reviewstring.equals("q") || reviewstring.equals("Q"))
+				return;
+			
+			ArrayList<FoodReview> temp = (ArrayList<FoodReview>)FoodReviewList.getInstance().getvalues();
+			lastfoodreviewid = temp.get(temp.size()-1).getFoodId();
+			newfoodreviewid = lastfoodreviewid+1;
+			foodreview = new FoodReview(newfoodreviewid, cusacnt.getAccountId(), selectedFoodId, grade, reviewstring);
+			
+			// FoodReviewList에도 추가 시키고,
+			FoodReviewList.getInstance().put(foodreview);
+			
+			// customerAccount의 foodReviewList에도 추가시키고,
+			cusacnt.getPersonalFoodReviews().add(newfoodreviewid);
+			
+			// 해당 Food 객체에도 추가시켜줘야됨
+			selectedFood.getReviews().add(newfoodreviewid);
+			
 			break;
 		case 2:
 			if(selectedFoodReview == null)
@@ -106,7 +133,34 @@ public class FavoriteFoodnFoodReviewManagerUI extends ManagerUI{
 				System.out.println("수정할 후기가 없습니다.");
 				return;
 			}
-			System.out.println("1.평점 수정		2.후기 수정");
+			System.out.println("작성한 요리 후기>> ");
+			System.out.println(selectedFoodReview.getDescription());
+			
+			System.out.println("기능선택(1.평점 수정		2.후기 수정		3.종료) : ");
+			choose = scan.nextInt();
+			while(choose<1 || choose>3)
+			{
+				System.out.println("잘못입력하셨습니다. 다시입력하십시오. : ");
+				choose = scan.nextInt();
+			}
+			switch(choose)
+			{
+			case 1:
+				System.out.println("새로운 평점을 입력해주십시오(1점~10점) : ");
+				grade = scan.nextInt();
+				selectedFoodReview.setGrade(grade);
+				System.out.println("평점이 수정되었습니다.");
+				break;
+			case 2:
+				System.out.println("새로운 후기를 작성해주십시오 : ");
+				reviewstring = scan.next();
+				selectedFoodReview.setReview(reviewstring);
+				System.out.println("후기가 수정되었습니다.");
+				break;
+			case 3:
+				return;
+			}
+			
 			break;
 		case 3:
 			if(selectedFoodReview == null)
