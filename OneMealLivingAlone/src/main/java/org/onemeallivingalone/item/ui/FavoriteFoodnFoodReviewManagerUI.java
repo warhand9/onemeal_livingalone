@@ -38,7 +38,7 @@ public class FavoriteFoodnFoodReviewManagerUI extends ManagerUI{
 				System.out.printf("%d. ", i+1);
 				System.out.println(FoodList.getInstance().get(cusacnt.getPersonalFavoriteFoods().get(i)).getSummaryDescription());
 			}
-			System.out.print("기능을 선택하십시오(1.요리내용보기	 2.관심요리 삭제		3.관심요리 후기관리	4.종료)");
+			System.out.print("기능을 선택하십시오(1.요리내용보기	 2.관심요리 삭제		3.관심요리 후기관리	4.내가 작성한 후기들 보기	5.종료)");
 			select = scan.nextInt();
 			while(select<1 || select>4)
 			{
@@ -57,6 +57,8 @@ public class FavoriteFoodnFoodReviewManagerUI extends ManagerUI{
 				foodReviewManage();
 				break;
 			case 4:
+				showMyReviews();
+			case 5:
 				return;
 			}
 		}
@@ -245,6 +247,21 @@ public class FavoriteFoodnFoodReviewManagerUI extends ManagerUI{
 		// 해당 후기를 해당 food의 요리정보에서도 삭제하고
 		deletingfood = FoodList.getInstance().get(foodid);
 		deletingfood.getReviews().remove(deletingfood.getReviews().indexOf(FoodReviewIDOfDeletingFood));
+	}
+	
+	public void showMyReviews()
+	{
+		int i;
+		FoodReview foodreview;
+		
+		System.out.println("내가 작성한 후기들>>");
+		for(i=0; i<cusacnt.getPersonalFoodReviews().size(); i++)
+		{
+			foodreview = FoodReviewList.getInstance().get(cusacnt.getPersonalFoodReviews().get(i));
+			System.out.printf("%d. ", i+1);
+			System.out.println(foodreview.getDescription());
+		}
+		System.out.println("작성한 후기 관리는 관심 요리 목록에서 특정 요리를 선택하여 실행하실 수 있습니다.");
 	}
 
 }
