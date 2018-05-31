@@ -3,6 +3,7 @@ package org.onemeallivingalone.item.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.onemeallivingalone.account.AdminAccount;
 import org.onemeallivingalone.account.CustomerAccount;
 import org.onemeallivingalone.center.CurrentUser;
@@ -219,7 +220,88 @@ public class FoodSearchByIngredientsUI extends ManagerUI{
 	
 	public void showResultOfSearchByIngredients()
 	{
+		int i=0;
+		int j=0;
+		int cnt=0;
+		int index=0;
+		int extraCost;
 		
+		ArrayList<Food> factor100foods = new ArrayList<>();
+		ArrayList<Food> exactly100food = new ArrayList<>();
+		ArrayList<Food> factorlt100foods = new ArrayList<>();
+
+		List<ImmutablePair<Double, Food>> foodsByIngredientPairs = FoodList.getInstance().filteringByIngredients(ingredientsForSearch);
+		
+		for (ImmutablePair<Double, Food> pair : foodsByIngredientPairs) {
+			if(pair.getKey() >= Double.valueOf(1.0))
+			{
+				index++;
+				factor100foods.add(pair.getValue());
+			}
+			else
+				factorlt100foods.add(pair.getValue());	// factor 기준으로 내림차순 순으로 추가됨
+		}
+		
+		for(Food f : factor100foods)
+		{
+			if(f.getIngredients().size()==ingredientsForSearch.size())
+			{
+				cnt++;
+				exactly100food.add(f);
+			}
+			else
+				break;
+		}
+		
+		System.out.println("입력한 식재료들과 일치도 100%인 요리들>>");
+		if(exactly100food.size()==0)
+			System.out.println("없습니다.");
+		else
+		{
+			for(Food f:exactly100food)
+			{
+				System.out.printf("%d. ", (i++) + 1);
+				System.out.println(f.getSummaryDescription());
+			}
+		}
+		
+		System.out.println("\n추가적인 식재료를 필요로 하는 요리들>>");
+		if(cnt==factor100foods.size())
+			System.out.println("없습니다.");
+		else
+		{
+			for(i=cnt; i<factor100foods.size(); i++)
+			{
+				System.out.printf("%d. ", (j++) + 1);
+				System.out.println(factor100foods.get(i).getSummaryDescription());
+				extraCost = factor100foods.get(i).getCookingCost() - searchIngredientsSum();
+				System.out.printf("추가비용 : %d\n", extraCost);
+			}
+		}
+		
+		System.out.println("\n일치도가 낮은 요리들>>");
+		if(factorlt100foods.size()==0)
+			System.out.println("없습니다.");
+		else
+		{
+			i=0;
+			for(Food f:factorlt100foods)
+			{
+				System.out.printf("%d. ", (i++) + 1);
+				System.out.println(f.getSummaryDescription());
+				System.out.println("일치도 : " + foodsByIngredientPairs.get(index).getKey()*100 + "%");
+			}
+		}
+		
+	}
+	int searchIngredientsSum()
+	{
+		int sum=0;
+		int i;
+		for(i=0; i<ingredientsForSearch.size();i++)
+			sum+= IngredientList.getInstance().get(ingredientsForSearch.get(i)).getPrice();
+		
+		return sum;
 	}
 
 }
