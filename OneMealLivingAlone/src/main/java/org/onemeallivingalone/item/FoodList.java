@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.TreeMap;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.onemeallivingalone.item.Food;
-import org.onemeallivingalone.item.FoodList;
 
 public class FoodList {
 
@@ -39,13 +37,13 @@ public class FoodList {
 			Collection<Integer> ingreIds = food.getIngredients();
 			if (!ingreIds.isEmpty()) {
 				int matched = 0;
-				for (Integer ingreId : ingreIds) {
-					if (keyIngredients.contains(ingreId)) {
+				for (Integer keyIngreId : keyIngredients) {
+					if (ingreIds.contains(keyIngreId)) {
 						matched++;
 					}
 				}
 
-				Double factor = Double.valueOf((double) matched / ingreIds.size());
+				Double factor = Double.valueOf((double) matched / keyIngredients.size());
 				if (factor.compareTo(INGREDIENT_SEARCH_FACTOR) >= 0) {
 					foodsByIngredientPairs.add(ImmutablePair.of(factor, food));
 				}
