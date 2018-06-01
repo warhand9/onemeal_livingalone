@@ -5,6 +5,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.onemeallivingalone.account.Account;
+import org.onemeallivingalone.account.AccountList;
+import org.onemeallivingalone.item.Food;
+import org.onemeallivingalone.item.FoodList;
+import org.onemeallivingalone.item.FoodReview;
+import org.onemeallivingalone.item.FoodReviewList;
+import org.onemeallivingalone.item.Ingredient;
+import org.onemeallivingalone.item.IngredientList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,16 +35,16 @@ public class RecordReader {
 			.registerModule(new ParameterNamesModule(JsonCreator.Mode.PROPERTIES))
 			.registerModule(new JavaTimeModule())
 			.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-	
+
 	private final FileManager fileManager;
-	
+
 	public RecordReader(FileManager fileManager) {
 		this.fileManager = fileManager;
 	}
 
 	public Collection<Object> readJsonRecords(Class<? extends Object> c, String dirName) throws IOException {
 		logger.debug("Starting reading records: {}", c.getSimpleName());
-		
+
 		// Read from the file
 		String fileName = String.format("%s/%s.json", dirName, c.getSimpleName());
 		String content = null;
@@ -52,7 +60,7 @@ public class RecordReader {
 		if (!contentJson.isArray()) {
 			throw new IOException("The JSON content is not an array!");
 		}
-		for (JsonNode objJson : (ArrayNode)contentJson) {
+		for (JsonNode objJson : (ArrayNode) contentJson) {
 			try {
 				Object obj = mapper.treeToValue(objJson, c);
 				records.add(obj);
@@ -64,6 +72,22 @@ public class RecordReader {
 		logger.debug("Done reading records: {}", c.getSimpleName());
 
 		return records;
+	}
+
+	public void readRecordsToLists() throws IOException {
+		try {
+			Collection<Object> itemsRead;
+			itemsRead = readJsonRecords(Account.class, FileManager.RECORDS_DIR);
+			AccountList.loadAllStatic(itemsRead);
+			itemsRead = readJsonRecords(Food.class, FileManager.RECORDS_DIR);
+			FoodList.getInstance().loadAll(itemsRead);
+			itemsRead = readJsonRecords(Ingredient.class, FileManager.RECORDS_DIR);
+			IngredientList.getInstance().loadAll(itemsRead);
+			itemsRead = readJsonRecords(FoodReview.class, FileManager.RECORDS_DIR);
+			FoodReviewList.getInstance().loadAll(itemsRead);
+		} catch (IOException e) {
+			throw e;
+		}
 	}
 
 }

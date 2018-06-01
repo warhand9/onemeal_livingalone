@@ -3,9 +3,6 @@ package org.onemeallivingalone.item;
 import java.util.Collection;
 import java.util.TreeMap;
 
-import org.onemeallivingalone.item.FoodReview;
-import org.onemeallivingalone.item.FoodReviewList;
-
 public class FoodReviewList {
 
 	private static class SingletonHolder {
@@ -24,13 +21,26 @@ public class FoodReviewList {
 	public FoodReview get(Integer foodReviewId) {
 		return foodReviews.get(foodReviewId);
 	}
-
+	
 	public static FoodReviewList getInstance() {
 		return SingletonHolder.INSTANCE;
 	}
 
 	public Collection<FoodReview> getvalues() {
 		return foodReviews.values();
+	}
+	
+	public void loadAll(Collection<Object> records) throws IllegalArgumentException {
+		this.foodReviews.clear();
+		for (Object record : records) {
+			if (record instanceof FoodReview) {
+				FoodReview review = (FoodReview) record;
+				this.foodReviews.put(review.getReviewId(), review);
+			} else {
+				this.foodReviews.clear();
+				throw new IllegalArgumentException("The element type must be FoodReview!");
+			}
+		}
 	}
 
 	public FoodReview put(FoodReview foodReview) {

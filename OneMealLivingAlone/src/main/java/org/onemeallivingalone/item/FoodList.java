@@ -49,10 +49,10 @@ public class FoodList {
 				}
 			}
 		}
-		
+
 		// Sort by the factor in descending order
 		Collections.sort(foodsByIngredientPairs, Comparator.comparing(p -> -p.getKey()));
-		
+
 		// Convert pairs to a list of foods
 		List<Food> foodsByIngredients = new ArrayList<>();
 		for (ImmutablePair<Double, Food> pair : foodsByIngredientPairs) {
@@ -84,6 +84,19 @@ public class FoodList {
 
 	public Collection<Food> getvalues() {
 		return foods.values();
+	}
+
+	public void loadAll(Collection<Object> records) throws IllegalArgumentException {
+		this.foods.clear();
+		for (Object record : records) {
+			if (record instanceof Food) {
+				Food food = (Food) record;
+				this.foods.put(food.getFoodId(), food);
+			} else {
+				this.foods.clear();
+				throw new IllegalArgumentException("The element type must be Food!");
+			}
+		}
 	}
 
 	public Food put(Food food) {

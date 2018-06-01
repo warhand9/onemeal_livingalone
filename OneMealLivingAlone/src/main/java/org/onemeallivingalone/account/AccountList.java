@@ -2,6 +2,7 @@ package org.onemeallivingalone.account;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 
 public class AccountList {
 	
@@ -28,6 +29,20 @@ public class AccountList {
 	
 	public static Collection<Account> getValues() {
 		return getInstance().accounts.values();
+	}
+	
+	public static void loadAllStatic(Collection<Object> records) throws IllegalArgumentException {
+		Map<String, Account> thisAccounts = getInstance().accounts;
+			thisAccounts.clear();
+		for (Object record : records) {
+			if (record instanceof Account) {
+				Account account = (Account) record;
+				thisAccounts.put(account.getAccountId(), account);
+			} else {
+				thisAccounts.clear();
+				throw new IllegalArgumentException("The element type must be Account!");
+			}
+		}
 	}
 	
 	public static Account put(Account account) {
