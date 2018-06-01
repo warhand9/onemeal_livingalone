@@ -5,6 +5,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.onemeallivingalone.account.Account;
+import org.onemeallivingalone.account.AccountList;
+import org.onemeallivingalone.item.Food;
+import org.onemeallivingalone.item.FoodList;
+import org.onemeallivingalone.item.FoodReview;
+import org.onemeallivingalone.item.FoodReviewList;
+import org.onemeallivingalone.item.Ingredient;
+import org.onemeallivingalone.item.IngredientList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,6 +66,17 @@ public class RecordWriter {
 		}
 
 		logger.debug("Done writing records: {}", c.getSimpleName());
+	}
+	
+	public void writeRecordsFromLists() throws IOException {
+		try {
+			writeJsonRecords(AccountList.getValues(), Account.class, FileManager.RECORDS_DIR);
+			writeJsonRecords(FoodList.getInstance().getvalues(), Food.class, FileManager.RECORDS_DIR);
+			writeJsonRecords(IngredientList.getInstance().getvalues(), Ingredient.class, FileManager.RECORDS_DIR);
+			writeJsonRecords(FoodReviewList.getInstance().getvalues(), FoodReview.class, FileManager.RECORDS_DIR);
+		} catch (IOException e) {
+			throw e;
+		}
 	}
 
 }

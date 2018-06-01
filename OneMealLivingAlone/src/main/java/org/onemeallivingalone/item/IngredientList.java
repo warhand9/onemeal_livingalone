@@ -1,8 +1,6 @@
 package org.onemeallivingalone.item;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.TreeMap;
 
 public class IngredientList {
@@ -31,6 +29,19 @@ public class IngredientList {
 		return ingredients.values();
 	}
 
+	public void loadAll(Collection<Object> records) throws IllegalArgumentException {
+		this.ingredients.clear();
+		for (Object record : records) {
+			if (record instanceof Ingredient) {
+				Ingredient ingredient = (Ingredient) record;
+				this.ingredients.put(ingredient.getIngredientId(), ingredient);
+			} else {
+				this.ingredients.clear();
+				throw new IllegalArgumentException("The element type must be Ingredient!");
+			}
+		}
+	}
+
 	public Ingredient put(Ingredient ingredient) {
 		return ingredients.put(ingredient.getIngredientId(), ingredient);
 	}
@@ -49,13 +60,10 @@ public class IngredientList {
 		return result;
 	}
 	*/
-	public Ingredient searchByName(String ingredientName)
-	{
-		Ingredient result=null;
-		for(Ingredient ingre : ingredients.values())
-		{
-			if(ingre.getName().equals(ingredientName))
-			{
+	public Ingredient searchByName(String ingredientName) {
+		Ingredient result = null;
+		for (Ingredient ingre : ingredients.values()) {
+			if (ingre.getName().equals(ingredientName)) {
 				result = ingre;
 				break;
 			}
