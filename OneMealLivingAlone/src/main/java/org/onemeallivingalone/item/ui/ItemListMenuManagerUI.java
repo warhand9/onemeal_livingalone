@@ -1,9 +1,13 @@
 package org.onemeallivingalone.item.ui;
 
 import org.onemeallivingalone.center.ui.ManagerUI;
+import java.util.Scanner;
+import java.util.Vector;
+import org.onemeallivingalone.item.Food;
 
 public class ItemListMenuManagerUI extends ManagerUI{
 
+	Scanner scan = new Scanner(System.in);	
 	@Override
 	public void interact() {
 		// TODO Auto-generated method stub
@@ -30,16 +34,44 @@ public class ItemListMenuManagerUI extends ManagerUI{
 	}
 	
 	void addFood() {
+		int num = 0;
+		String name = "";
+		System.out.print("Let me know the new number of Food ID");
+		num = scan.nextInt();
+		scan.nextLine();
+		if((num < 1)) {
+			System.out.println("That number is not valid");
+			return ;
+		}
+		//checking existence
+		if() {
+			System.out.println("That food is already registered");
+			return ;
+		}
+		
+		System.out.print("Food name : ");
+		name = scan.nextLine();
+		
+		System.out.println("finished to add new food.");
 		
 	}
 	void removeFood() {
-		
+		int num = 0;
+		System.out.print("Which food do you want to delete ?");
+		num = scan.nextInt();
+		scan.nextLine();
 	}
 	void addIngredient() {
-		
+		int num = 0;
+		System.out.print("Let me know the new number of ingredient ID");
+		num = scan.nextInt();
+		scan.nextLine();
 	}
 	void removeIngredient(){
-		
+		int num = 0;
+		System.out.print("Which ingredient do you want to delete ?");
+		num = scan.nextInt();
+		scan.nextLine();
 	}
 }
 
