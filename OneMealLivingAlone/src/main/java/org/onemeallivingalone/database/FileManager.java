@@ -18,7 +18,7 @@ public class FileManager {
 	
 	public static String RECORDS_DIR = "data";
 
-	private final Logger logger = LoggerFactory.getLogger("omla-data-driver");
+	private transient final Logger logger = LoggerFactory.getLogger("omla-data-driver");
 
 	/**
 	 * 파일에서 모든 내용을 읽어옵니다.

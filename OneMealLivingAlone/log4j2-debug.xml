@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <ThresholdFilter level="TRACE" onMatch="ACCEPT" onMismatch="DENY" />
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss.SSS} [%t] %-5p %c{18} - %m%n</Pattern>
+            </PatternLayout>
+        </Console>
+        <RollingFile name="logfile" fileName="log/omla.log" filePattern="log/$${date:yyyy-MM}/%d{MM-dd-yyyy}-%i.log.gz">
+            <ThresholdFilter level="TRACE" onMatch="ACCEPT" onMismatch="DENY" />
+            <PatternLayout>
+                <Pattern>%d{ISO8601} | %-5.5p | %-12.12t | %-20.20c{18} | %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="1 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="10" />
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="omla-center" level="TRACE" additivity="false">
+            <AppenderRef ref="console" />
+            <AppenderRef ref="logfile" />
+        </Logger>
+        <Logger name="omla-data-driver" level="TRACE" additivity="false">
+            <AppenderRef ref="console" />
+            <AppenderRef ref="logfile" />
+        </Logger>
+        <Root level="INFO">
+            <AppenderRef ref="console" />
+            <AppenderRef ref="logfile" />
+        </Root>
+    </Loggers>
+</Configuration>

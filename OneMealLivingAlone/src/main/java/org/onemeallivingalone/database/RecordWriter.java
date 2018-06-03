@@ -26,9 +26,9 @@ import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 
 public class RecordWriter {
 
-	private final Logger logger = LoggerFactory.getLogger("omla-data-driver");
+	private transient final Logger logger = LoggerFactory.getLogger("omla-data-driver");
 
-	private final ObjectMapper mapper = new ObjectMapper()
+	private transient final ObjectMapper mapper = new ObjectMapper()
 			.registerModule(new Jdk8Module())
 			.registerModule(new ParameterNamesModule(JsonCreator.Mode.PROPERTIES))
 			.registerModule(new JavaTimeModule())
@@ -68,14 +68,29 @@ public class RecordWriter {
 		logger.debug("Done writing records: {}", c.getSimpleName());
 	}
 	
-	public void writeRecordsFromLists() throws IOException {
+	public void writeRecordsFromLists() {
 		try {
 			writeJsonRecords(AccountList.getValues(), Account.class, FileManager.RECORDS_DIR);
+		} catch (IOException e) {
+			logger.error("Cannot write accounts from lists!", e);
+		}
+
+		try {
 			writeJsonRecords(FoodList.getInstance().getvalues(), Food.class, FileManager.RECORDS_DIR);
+		} catch (IOException e) {
+			logger.error("Cannot write foods from lists!", e);
+		}
+
+		try {
 			writeJsonRecords(IngredientList.getInstance().getvalues(), Ingredient.class, FileManager.RECORDS_DIR);
+		} catch (IOException e) {
+			logger.error("Cannot write ingredients from lists!", e);
+		}
+
+		try {
 			writeJsonRecords(FoodReviewList.getInstance().getvalues(), FoodReview.class, FileManager.RECORDS_DIR);
 		} catch (IOException e) {
-			throw e;
+			logger.error("Cannot write food reviews from lists!", e);
 		}
 	}
 

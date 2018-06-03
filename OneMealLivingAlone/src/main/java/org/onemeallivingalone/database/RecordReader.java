@@ -28,9 +28,9 @@ import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 
 public class RecordReader {
 
-	private final Logger logger = LoggerFactory.getLogger("omla-data-driver");
+	private transient final Logger logger = LoggerFactory.getLogger("omla-data-driver");
 
-	private final ObjectMapper mapper = new ObjectMapper()
+	private transient final ObjectMapper mapper = new ObjectMapper()
 			.registerModule(new Jdk8Module())
 			.registerModule(new ParameterNamesModule(JsonCreator.Mode.PROPERTIES))
 			.registerModule(new JavaTimeModule())
@@ -74,19 +74,29 @@ public class RecordReader {
 		return records;
 	}
 
-	public void readRecordsToLists() throws IOException {
+	public void readRecordsToLists() {
 		try {
-			Collection<Object> itemsRead;
-			itemsRead = readJsonRecords(Account.class, FileManager.RECORDS_DIR);
-			AccountList.loadAllStatic(itemsRead);
-			itemsRead = readJsonRecords(Food.class, FileManager.RECORDS_DIR);
-			FoodList.getInstance().loadAll(itemsRead);
-			itemsRead = readJsonRecords(Ingredient.class, FileManager.RECORDS_DIR);
-			IngredientList.getInstance().loadAll(itemsRead);
-			itemsRead = readJsonRecords(FoodReview.class, FileManager.RECORDS_DIR);
-			FoodReviewList.getInstance().loadAll(itemsRead);
+			AccountList.loadAllStatic(readJsonRecords(Account.class, FileManager.RECORDS_DIR));
 		} catch (IOException e) {
-			throw e;
+			logger.error("Cannot read accounts to lists!", e);
+		}
+
+		try {
+			FoodList.getInstance().loadAll(readJsonRecords(Food.class, FileManager.RECORDS_DIR));
+		} catch (IOException e) {
+			logger.error("Cannot read foods to lists!", e);
+		}
+
+		try {
+			IngredientList.getInstance().loadAll(readJsonRecords(Ingredient.class, FileManager.RECORDS_DIR));
+		} catch (IOException e) {
+			logger.error("Cannot read ingredients to lists!", e);
+		}
+
+		try {
+			FoodReviewList.getInstance().loadAll(readJsonRecords(FoodReview.class, FileManager.RECORDS_DIR));
+		} catch (IOException e) {
+			logger.error("Cannot read food reviews to lists!", e);
 		}
 	}
 
