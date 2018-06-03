@@ -1,0 +1,13 @@
+[ {
+  "type" : "customer",
+  "accountId" : "custom",
+  "password" : "custom2@",
+  "email" : "aaa@bbb.net",
+  "personalIngredients" : [ ],
+  "personalFavoriteFoods" : [ ],
+  "personalFoodReviews" : [ ]
+}, {
+  "type" : "admin",
+  "accountId" : "admin",
+  "password" : "qwerty1!"
+} ]
