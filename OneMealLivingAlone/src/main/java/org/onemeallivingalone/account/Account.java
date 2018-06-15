@@ -1,6 +1,7 @@
 package org.onemeallivingalone.account;
 
 import java.util.Comparator;
+import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -20,6 +21,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class Account {
 
+	private static final String ID_REGEX = "^[a-zA-Z][_a-zA-Z0-9]{4,}$"; ///< ID 정규 표현식
+	private static final Pattern ID_PATTERN = Pattern.compile(ID_REGEX); ///< ID Pattern 객체
+
 	/**
 	 * 계정 ID 기준 오름차순 비교기.
 	 */
@@ -34,7 +38,7 @@ public abstract class Account {
 	/**
 	 * 계정 ID의 유효성을 검사합니다.
 	 * 
-	 * 계정 ID는 알파벳으로 시작해야 하며, 알파벳, 숫자, 밑줄('_')로 구성돼야 합니다.
+	 * 계정 ID는 5글자 이상으로, 시작 문자는 알파벳이어야 하며, 나머지는 알파벳, 숫자, 밑줄('_')로 구성돼야 합니다.
 	 * 
 	 * @param id
 	 *            계정 ID
@@ -43,13 +47,7 @@ public abstract class Account {
 	public static boolean checkAccountIdValidity(String id) {
 		if (id == null)
 			return false;
-		if (id.isEmpty() || !Character.isAlphabetic(id.charAt(0)))
-			return false;
-		for (char ch : id.toCharArray()) {
-			if (!Character.isAlphabetic(ch) && !Character.isDigit(ch) && ch != '_')
-				return false;
-		}
-		return true;
+		return ID_PATTERN.matcher(id).matches();
 	}
 
 	/**
@@ -70,7 +68,7 @@ public abstract class Account {
 
 		String numberstring = "0123456789";
 		String characterstring = "abcdefghijklmnopqrstuvwxyzABCDEFGHIZKLMNOPQRSTUVWXYZ";
-		String specialstring = "!@#$%^&*_";
+		String specialstring = "`~!@#$%^&*()-_=+[{]}\\|;:,<.>/?";
 		boolean numbercheck = false;
 		boolean charcheck = false;
 		boolean specialcheck = false;
