@@ -29,7 +29,7 @@ public class FoodList {
 		foods.clear();
 	}
 
-	public Collection<Food> filteringByIngredients(Collection<Integer> keyIngredients) {
+	public Collection<ImmutablePair<Double, Food>> filteringByIngredients(Collection<Integer> keyIngredients) {
 		List<ImmutablePair<Double, Food>> foodsByIngredientPairs = new ArrayList<>();
 
 		// Search by the factor
@@ -52,14 +52,8 @@ public class FoodList {
 
 		// Sort by the factor in descending order
 		Collections.sort(foodsByIngredientPairs, Comparator.comparing(p -> -p.getKey()));
-
-		// Convert pairs to a list of foods
-		List<Food> foodsByIngredients = new ArrayList<>();
-		for (ImmutablePair<Double, Food> pair : foodsByIngredientPairs) {
-			foodsByIngredients.add(pair.getValue());
-		}
-
-		return foodsByIngredients;
+		
+		return foodsByIngredientPairs;
 	}
 
 	public Collection<Food> filteringByName(String foodName) {
