@@ -115,7 +115,7 @@ public class FavoriteFoodnFoodReviewManagerUI extends ManagerUI{
 				return;
 			
 			ArrayList<FoodReview> temp = (ArrayList<FoodReview>)FoodReviewList.getInstance().getvalues();
-			lastfoodreviewid = temp.get(temp.size()-1).getFoodId();
+			lastfoodreviewid = (temp.size() == 0) ? 999 : temp.get(temp.size()-1).getFoodId();
 			newfoodreviewid = lastfoodreviewid+1;
 			foodreview = new FoodReview(newfoodreviewid, cusacnt.getAccountId(), selectedFoodId, grade, reviewstring);
 			

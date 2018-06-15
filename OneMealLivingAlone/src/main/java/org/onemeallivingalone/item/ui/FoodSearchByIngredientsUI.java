@@ -15,7 +15,7 @@ public class FoodSearchByIngredientsUI extends ManagerUI{
 	CustomerAccount cusacnt;
 	ArrayList<Integer> ingredientsForSearch = new ArrayList<Integer>();
 	int ingredientID;
-	ArrayList<Food> searchedFood;
+	//ArrayList<Food> searchedFood;
 	
 	@Override
 	public void interact() {
@@ -65,7 +65,7 @@ public class FoodSearchByIngredientsUI extends ManagerUI{
 			}
 		}
 		System.out.print("\n위의 재료들로 검색한 결과>>\n");
-		searchedFood = (ArrayList<Food>)FoodList.getInstance().filteringByIngredients(ingredientsForSearch);
+		//searchedFood = (ArrayList<Food>)FoodList.getInstance().filteringByIngredients(ingredientsForSearch);
 		
 		// 결과 출력 // 복잡한 부분
 		showResultOfSearchByIngredients();
@@ -230,7 +230,7 @@ public class FoodSearchByIngredientsUI extends ManagerUI{
 		ArrayList<Food> exactly100food = new ArrayList<>();
 		ArrayList<Food> factorlt100foods = new ArrayList<>();
 
-		List<ImmutablePair<Double, Food>> foodsByIngredientPairs = FoodList.getInstance().filteringByIngredients(ingredientsForSearch);
+		List<ImmutablePair<Double, Food>> foodsByIngredientPairs = (List<ImmutablePair<Double, Food>>)FoodList.getInstance().filteringByIngredients(ingredientsForSearch);
 		
 		for (ImmutablePair<Double, Food> pair : foodsByIngredientPairs) {
 			if(pair.getKey() >= Double.valueOf(1.0))
