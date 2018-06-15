@@ -3,6 +3,9 @@ package org.onemeallivingalone.item.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.onemeallivingalone.account.Account;
+import org.onemeallivingalone.account.AccountList;
+import org.onemeallivingalone.account.CustomerAccount;
 import org.onemeallivingalone.center.ui.ManagerUI;
 import org.onemeallivingalone.item.Food;
 import org.onemeallivingalone.item.FoodList;
@@ -146,6 +149,7 @@ public class IngredientListManager extends ManagerUI{
 	{
 		int ingreId;
 		int i;
+		CustomerAccount cus;
 		
 		System.out.println("식재료 삭제>>");
 		System.out.println("삭제할 식재료 Id를 입력하십시오. : ");
@@ -165,6 +169,19 @@ public class IngredientListManager extends ManagerUI{
 			{
 				if(f.getIngredients().contains(ingreId))
 					f.getIngredients().remove(f.getIngredients().indexOf(ingreId));
+			}
+			
+			// 개인 식재료 리스트에서도 지우고
+			for(Account acc : AccountList.getValues())
+			{
+				if(acc instanceof CustomerAccount)
+				{
+					cus = (CustomerAccount)acc;
+					if(cus.getPersonalIngredients().contains(ingreId))
+					{
+						cus.getPersonalIngredients().remove(cus.getPersonalIngredients().indexOf(ingreId));
+					}
+				}
 			}
 		}	
 	}
