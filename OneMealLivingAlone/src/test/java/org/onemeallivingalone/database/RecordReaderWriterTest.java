@@ -19,7 +19,7 @@ import org.onemeallivingalone.item.Ingredient;
 
 public class RecordReaderWriterTest {
 
-	private static String TEST_RECORDS_DIR = "test-data";
+	private static String TEST_RECORDS_DIR = "test-data/record-reader-writer";
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {

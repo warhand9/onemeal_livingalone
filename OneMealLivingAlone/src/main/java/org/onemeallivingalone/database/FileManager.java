@@ -25,7 +25,6 @@ public class FileManager {
 	 * 
 	 * @param fileName
 	 *            파일 이름 또는 경로
-	 * @return 성공할 경우 문자열을 반환하고, 실패할 경우 null을 반환합니다.
 	 * @throws IOException
 	 */
 	public String readFromFile(String fileName) throws IOException {
@@ -60,7 +59,6 @@ public class FileManager {
 	 *            파일 이름 또는 경로
 	 * @param content
 	 *            기록할 문자열
-	 * @return 읽기 성공 여부
 	 * @throws IOException
 	 */
 	public void writeToFile(String fileName, String content) throws IOException {

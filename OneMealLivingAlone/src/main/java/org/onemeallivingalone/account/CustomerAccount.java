@@ -15,7 +15,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
  */
 public class CustomerAccount extends Account {
 
-	private static final String EMAIL_REGEX = "^[_a-zA-Z0-9\\.+-]+@[_a-zA-Z0-9\\.+-]+\\.[a-zA-Z]+$"; ///< 이메일 정규 표현식
+	/// 이메일 정규 표현식
+	private static final String EMAIL_REGEX = "^[_a-zA-Z0-9\\.+-]+@[_a-zA-Z0-9\\.+-]+\\.[a-zA-Z]{2,}$";
 	private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX); ///< 이메일 Pattern 객체
 
 	/**
@@ -143,15 +144,6 @@ public class CustomerAccount extends Account {
 	 */
 	public List<Integer> getPersonalIngredients() {
 		return personalIngredients;
-	}
-
-	public void printPersonalFavoriteFoods() {
-	}
-
-	public void printpersonalFoodReviews() {
-	}
-
-	public void printPersonalIngredients() {
 	}
 
 }
