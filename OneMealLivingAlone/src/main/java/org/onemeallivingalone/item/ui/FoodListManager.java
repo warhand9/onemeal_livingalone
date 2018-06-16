@@ -37,14 +37,15 @@ public class FoodListManager extends ManagerUI{
 			}
 			else
 			{
-				System.out.println("<식재료 목록>");
+				System.out.println("<요리 목록>");
 				for(i=0; i<5; i++)
 				{
 					if(((cur_page-1)*5 + i)>=listcnt)
 						break;
 					
 					System.out.printf("%d. ",i+1);
-					System.out.println(foods.get((cur_page-1)*5+i).getSummaryDescription());
+					System.out.print(foods.get((cur_page-1)*5+i).getSummaryDescription());
+					System.out.println(" / ID : " + foods.get((cur_page-1)*5+i).getFoodId());
 				}
 			}
 			

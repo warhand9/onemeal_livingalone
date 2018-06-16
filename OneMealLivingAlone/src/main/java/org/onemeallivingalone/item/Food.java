@@ -118,7 +118,7 @@ public class Food {
 		}
 
 		return String.format("음식 ID: %d\n음식 이름: %s\n조리 시간: %d 분\n예상 조리 비용: %d 원\n식재료: %s\n"
-				+ "평균 점수: %lf 점\n조리법:\n%s\n\n후기:\n%s",
+				+ "평균 점수: %f 점\n조리법:\n%s\n\n후기:\n%s",
 				foodId, name, cookingTime, cookingCost, ingreBulkDescription, averageGrade, recipe, reviewsBulk);
 	}
 
@@ -129,8 +129,8 @@ public class Food {
 	@JsonIgnore
 	public String getSummaryDescription() {
 		// foodID / name / cookingTime / cookingCost
-		return String.format("%s / %s / 시간: %d 분 / 가격: %d 원 / 점수: %.1lf 점", foodId, name, cookingTime,
-				cookingCost);
+		return String.format("%d / %s / 시간: %d 분 / 가격: %d 원 / 평점: %.1f 점", foodId, name, cookingTime,
+				cookingCost, averageGrade);
 	}
 
 	public String getName() {
