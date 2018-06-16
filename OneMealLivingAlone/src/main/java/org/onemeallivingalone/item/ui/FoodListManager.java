@@ -108,18 +108,20 @@ public class FoodListManager extends ManagerUI{
 		}
 		
 		System.out.println("추가하고자 하는 요리 이름을 입력하십시오.");
-		name = scan.next();
+		scan.nextLine();
+		name = scan.nextLine();
 		while(foodNameValidCheck(name)!=null)
 		{
 			System.out.println("이미 존재하는 이름입니다. 다시 입력하십시오.");
-			name = scan.next();
+			name = scan.nextLine();
 		}
 		
 		System.out.println("추가하고자 하는 요리의 소요시간을 입력하십시오.");
 		cookingTime = scan.nextInt();
 		
 		System.out.println("추가하고자 하는 요리의 레시피를 입력하십시오.");
-		recipe = scan.next();
+		scan.nextLine();
+		recipe = scan.nextLine();
 		
 		food = new Food(foodId, name, cookingTime, recipe);
 		/*System.out.println("추가하고자 하는 요리에 필요한 재료들을 입력하십시오.(종료 : q)");
@@ -191,7 +193,8 @@ public class FoodListManager extends ManagerUI{
 					break;
 				case 2:
 					System.out.println("새로운 레시피를 입력하십시오.");
-					recipe = scan.next();
+					scan.nextLine();
+					recipe = scan.nextLine();
 					food.setRecipe(recipe);
 					break;
 				case 3:
