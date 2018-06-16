@@ -9,6 +9,10 @@ import org.onemeallivingalone.account.AdminAccount;
 import org.onemeallivingalone.account.CustomerAccount;
 import org.onemeallivingalone.center.CurrentUser;
 import org.onemeallivingalone.center.ui.ManagerUI;
+import org.onemeallivingalone.item.Food;
+import org.onemeallivingalone.item.FoodList;
+import org.onemeallivingalone.item.FoodReview;
+import org.onemeallivingalone.item.FoodReviewList;
 
 public class SystemAccountManagerUI extends ManagerUI{
 
@@ -79,6 +83,13 @@ public class SystemAccountManagerUI extends ManagerUI{
 	
 	public void deleteOtherAccount()
 	{
+		int i;
+		Account removedAcc;
+		CustomerAccount cus;
+		Food favoriteFood;
+		FoodReview removedFoodReview;
+		int removedFoodReviewId;
+		
 		String accountID;
 		System.out.print("Enter the accountId to delete : ");
 		accountID = scan.next();
@@ -90,8 +101,26 @@ public class SystemAccountManagerUI extends ManagerUI{
 			return;
 		}
 		
-		if(AccountList.remove(accountID) != null)
+		if((removedAcc=AccountList.remove(accountID)) != null)
+		{
 			System.out.println("삭제하였습니다.\n");
+		
+			cus = (CustomerAccount)removedAcc;
+			//removedAccount가 가지고 있던 favorite Foods들을 Food하나씩 가져와서
+			//그 객체가 가지고 있는 reveiwList에서 지금 삭제하는 계정과 관련된 review(integer값)도 삭제
+			//그 과정에서 ReviewList에서 해당 review도 삭제
+			ArrayList<Integer> favoritefoods = (ArrayList<Integer>) cus.getPersonalFavoriteFoods();
+			for(i=0; i<favoritefoods.size(); i++)
+			{
+				favoriteFood = FoodList.getInstance().get(favoritefoods.get(i));
+				removedFoodReview = getFoodReview(favoriteFood.getFoodId(), accountID);
+				if(removedFoodReview == null)	continue;
+				removedFoodReviewId = removedFoodReview.getFoodId();
+				favoriteFood.getReviews().remove(favoriteFood.getReviews().indexOf(removedFoodReviewId));
+				FoodReviewList.getInstance().remove(removedFoodReviewId);
+			}
+			
+		}
 		else
 			System.out.println("삭제하려는 계정이 없습니다!!\n");
 	}
@@ -161,5 +190,16 @@ public class SystemAccountManagerUI extends ManagerUI{
 					break;
 			}
 		}	
+	}
+	
+	FoodReview getFoodReview(int favoriteFoodId, String accountID)
+	{
+		for(FoodReview fr : FoodReviewList.getInstance().getvalues())
+		{
+			if(fr.getFoodId() == favoriteFoodId && fr.getUserId().equals(accountID))
+				return fr;
+		}
+		
+		return null;
 	}
 }

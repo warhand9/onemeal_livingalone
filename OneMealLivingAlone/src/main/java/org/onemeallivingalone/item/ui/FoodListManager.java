@@ -248,7 +248,7 @@ public class FoodListManager extends ManagerUI{
 					}
 					
 					// customer가 favorite food list에서 해당 food에 대해서 review를 작성했을 수도 있고 안했을 수도 있고
-					foodReview = getFoodReviewByFood(foodId);
+					foodReview = getFoodReviewByFood(cus, foodId);
 					if(foodReview == null)	continue;
 					foodReviewId = foodReview.getReviewId();
 					// 이 문장이 실행된다는 것은 customer가 favorite food list에서 해당 food에 대해서 review를 작성했다는 의미
@@ -327,11 +327,11 @@ public class FoodListManager extends ManagerUI{
 		}
 	}
 	
-	FoodReview getFoodReviewByFood(int foodId)
+	FoodReview getFoodReviewByFood(CustomerAccount cus, int foodId)
 	{
 		for(FoodReview fr : FoodReviewList.getInstance().getvalues())
 		{
-			if(fr.getFoodId() == foodId)
+			if(fr.getFoodId() == foodId && fr.getUserId().equals(cus.getAccountId()))
 				return fr;
 		}
 		
