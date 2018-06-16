@@ -104,11 +104,12 @@ public class IngredientListManager extends ManagerUI{
 		}
 		
 		System.out.println("추가하고자 하는 식재료 이름을 입력하십시오.");
-		ingreName = scan.next();
+		scan.nextLine();
+		ingreName = scan.nextLine();
 		while(nameValidCheck(ingreName)!=null)
 		{
 			System.out.println("이미 존재하는 이름입니다. 다시 입력하십시오.");
-			ingreName = scan.next();
+			ingreName = scan.nextLine();
 		}
 		
 		System.out.println("추가하고자 하는 식재료의 가격을 입력하십시오.");
