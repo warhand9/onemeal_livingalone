@@ -44,12 +44,13 @@ public class IngredientListManager extends ManagerUI{
 						break;
 					
 					System.out.printf("%d. ",i+1);
-					System.out.println(ingres.get((cur_page-1)*5+i).getDescription());
+					System.out.print(ingres.get((cur_page-1)*5+i).getDescription());
+					System.out.println(" ID : " + ingres.get((cur_page-1)*5+i).getIngredientId());
 				}
 			}
 			
 				
-			System.out.print("(1.이전페이지		2.다음페이지	3.식재료 추가	4.식재료 수정	5.식제료 삭제	6.종료)입력 : ");
+			System.out.print("(1.이전페이지   2.다음페이지   3.식재료 추가   4.식재료 수정   5.식제료 삭제   6.종료)입력 : ");
 			select = scan.nextInt();
 			while(select<1 || select>6)
 			{
@@ -184,6 +185,7 @@ public class IngredientListManager extends ManagerUI{
 				}
 			}
 		}	
+		System.out.println("삭제가 완료되었습니다.");
 	}
 	
 	Ingredient idValidCheck(int ingreId)
