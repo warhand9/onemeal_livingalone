@@ -129,7 +129,7 @@ public class Food {
 	@JsonIgnore
 	public String getSummaryDescription() {
 		// foodID / name / cookingTime / cookingCost
-		return String.format("%d / %s / 시간: %d 분 / 가격: %d 원 / 평점: %.1f 점", foodId, name, cookingTime,
+		return String.format("ID: %d / %s / 시간: %d 분 / 가격: %d 원 / 평점: %.1f 점", foodId, name, cookingTime,
 				cookingCost, averageGrade);
 	}
 

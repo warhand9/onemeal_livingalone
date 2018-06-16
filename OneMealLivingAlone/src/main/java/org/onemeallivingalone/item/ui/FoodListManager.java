@@ -44,8 +44,8 @@ public class FoodListManager extends ManagerUI{
 						break;
 					
 					System.out.printf("%d. ",i+1);
-					System.out.print(foods.get((cur_page-1)*5+i).getSummaryDescription());
-					System.out.println(" / ID : " + foods.get((cur_page-1)*5+i).getFoodId());
+					System.out.println(foods.get((cur_page-1)*5+i).getSummaryDescription());
+					//System.out.println(" / ID : " + foods.get((cur_page-1)*5+i).getFoodId());
 				}
 			}
 			
