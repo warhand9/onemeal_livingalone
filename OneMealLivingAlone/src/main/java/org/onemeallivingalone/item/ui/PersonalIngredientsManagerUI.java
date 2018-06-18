@@ -80,7 +80,7 @@ public class PersonalIngredientsManagerUI extends ManagerUI{
 			return;
 		}
 		
-		cusacnt.getPersonalIngredients().remove(ingreID);
+		cusacnt.getPersonalIngredients().remove(cusacnt.getPersonalIngredients().indexOf(ingreID));
 		System.out.println("해당 식재료가 개인 식재료 리스트에서 제거되었습니다.");
 	}
 

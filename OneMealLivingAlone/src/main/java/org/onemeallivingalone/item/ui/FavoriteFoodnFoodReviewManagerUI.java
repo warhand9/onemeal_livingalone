@@ -34,6 +34,11 @@ public class FavoriteFoodnFoodReviewManagerUI extends ManagerUI{
 		while(true)
 		{
 			System.out.println("관심요리 목록>>");
+			if(cusacnt.getPersonalFavoriteFoods().size() == 0)
+			{
+				System.out.println("관심요리가 없습니다.");
+				return;
+			}
 			for(i=0; i<cusacnt.getPersonalFavoriteFoods().size(); i++)
 			{
 				System.out.printf("%d. ", i+1);
@@ -41,7 +46,7 @@ public class FavoriteFoodnFoodReviewManagerUI extends ManagerUI{
 			}
 			System.out.println("기능을 선택하십시오(1.요리내용보기     2.관심요리 삭제     3.관심요리 후기관리     4.내가 작성한 후기들 보기     5.종료)");
 			select = scan.nextInt();
-			while(select<1 || select>4)
+			while(select<1 || select>5)
 			{
 				System.out.print("잘못된 입력입니다. 다시입력하십시오. : ");
 				select = scan.nextInt();
@@ -155,7 +160,7 @@ public class FavoriteFoodnFoodReviewManagerUI extends ManagerUI{
 			System.out.println("작성한 요리 후기>> ");
 			System.out.println(selectedFoodReview.getDescription());
 			
-			System.out.println("기능선택(1.평점 수정		2.후기 수정		3.종료) : ");
+			System.out.println("기능선택(1.평점 수정     2.후기 수정     3.종료) : ");
 			choose = scan.nextInt();
 			while(choose<1 || choose>3)
 			{
@@ -291,7 +296,6 @@ public class FavoriteFoodnFoodReviewManagerUI extends ManagerUI{
 		ArrayList<FoodReview> frs = new ArrayList<FoodReview>(FoodReviewList.getInstance().getvalues());
 		for(FoodReview fr : frs)
 		{
-			System.out.println(fr.getFoodId());
 			if(fr.getFoodId() == newfoodreviewid)
 				return 1;
 		}

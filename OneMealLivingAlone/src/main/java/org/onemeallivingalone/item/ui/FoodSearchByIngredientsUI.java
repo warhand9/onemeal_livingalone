@@ -124,8 +124,11 @@ public class FoodSearchByIngredientsUI extends ManagerUI {
 				if (IngredientList.getInstance().get(ingredientID) == null)
 					System.out.println("선택하신 식재료가 없습니다.");
 				else {
+					if(ingredientsForSearch.contains(ingredientID))
+						System.out.println("이미 입력하신 재료입니다.");
+					else {
 					ingredientsForSearch.add(ingredientID);
-					System.out.println("입력되었습니다.");
+					System.out.println("입력되었습니다.");}
 				}
 				break;
 			case 4:
@@ -134,31 +137,6 @@ public class FoodSearchByIngredientsUI extends ManagerUI {
 			}
 		}
 	}
-
-	/*public void getIngredientsForSearchBySearching()
-	{
-		new IngredientSearchManagerUI().showAllIngredients();
-		
-		System.out.println("검색에 이용할 식재료를 선택하십시오(선택종료 : -1)");
-		while(true)
-		{
-			System.out.print("입력(종료 : -1) : ");
-			ingredientID = scan.nextInt();
-			if(ingredientID == -1)
-				break;
-			
-			if(IngredientList.get(ingredientID) == null)
-			{
-				System.out.println("잘못 입력하셨습니다. 다시 입력하십시오.");
-			}
-			else
-			{
-				ingredientsForSearch.add(ingredientID);
-				System.out.println("입력되었습니다.");
-			}
-		}
-		System.out.println("검색에 이용할 식재료 선택이 완료되었습니다.");
-	}*/
 
 	public void getIngredientsForSearchByPersonalIngredients() {
 		int i;
@@ -189,8 +167,11 @@ public class FoodSearchByIngredientsUI extends ManagerUI {
 			if (cusacnt.getPersonalIngredients().contains(ingredientID) == false) {
 				System.out.println("잘못 입력하셨습니다. 다시 입력하십시오.");
 			} else {
+				if(ingredientsForSearch.contains(ingredientID))
+					System.out.println("이미 입력하신 재료입니다.");
+				else {
 				ingredientsForSearch.add(ingredientID);
-				System.out.println("입력되었습니다.");
+				System.out.println("입력되었습니다.");}
 			}
 		}
 		System.out.println("검색에 이용할 식재료 선택이 완료되었습니다.");
