@@ -4,6 +4,8 @@ import org.onemeallivingalone.center.ui.MainMenuManagerUI;
 import org.onemeallivingalone.database.FileManager;
 import org.onemeallivingalone.database.RecordReader;
 import org.onemeallivingalone.database.RecordWriter;
+import org.onemeallivingalone.item.Food;
+import org.onemeallivingalone.item.FoodList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,6 +30,18 @@ public class OnemealLivingalone {
 		{
 			RecordReader recordReader = new RecordReader(new FileManager());
 			recordReader.readRecordsToLists();
+		}
+		
+		// Apply operations on data by program arguments
+		for (String arg : args) {
+			if ("--food-recal".equals(arg)) {
+				logger.info("Started to recalculate foods");
+				for (Food food : FoodList.getInstance().getvalues()) {
+					food.recalculateCookingCost();
+					food.recalculateAverageGrade();
+				}
+				logger.info("Done recalculating foods");
+			}
 		}
 
 		MainMenuManagerUI mainMenuManager = new MainMenuManagerUI();
