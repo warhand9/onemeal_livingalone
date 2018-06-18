@@ -3,13 +3,37 @@ package org.onemeallivingalone.item;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.TreeMap;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
 public class FoodList {
+
+	public static class FoodSearchByIngredientResult {
+
+		private final List<FoodIndexByIngredient> foodIndexes;
+		private final int perfectMatchCount;
+		private final int noExtraCostCount;
+
+		public FoodSearchByIngredientResult(List<FoodIndexByIngredient> foodIndexes, int perfectMatchCount,
+				int noExtraCostCount) {
+			this.foodIndexes = foodIndexes;
+			this.perfectMatchCount = perfectMatchCount;
+			this.noExtraCostCount = noExtraCostCount;
+		}
+
+		public List<FoodIndexByIngredient> getFoodIndexes() {
+			return foodIndexes;
+		}
+
+		public int getNoExtraCostCount() {
+			return noExtraCostCount;
+		}
+
+		public int getPerfectMatchCount() {
+			return perfectMatchCount;
+		}
+
+	}
 
 	private static class SingletonHolder {
 
@@ -17,7 +41,7 @@ public class FoodList {
 
 	}
 
-	private static final Double INGREDIENT_SEARCH_FACTOR = Double.valueOf(0.5);
+	private static final double INGREDIENT_SEARCH_FACTOR = 0.5;
 
 	public static FoodList getInstance() {
 		return SingletonHolder.INSTANCE;
@@ -29,31 +53,47 @@ public class FoodList {
 		foods.clear();
 	}
 
-	public Collection<ImmutablePair<Double, Food>> filteringByIngredients(Collection<Integer> keyIngredients) {
-		List<ImmutablePair<Double, Food>> foodsByIngredientPairs = new ArrayList<>();
+	public FoodSearchByIngredientResult filteringByIngredients(Collection<Integer> keyIngredients) {
+		// Check the emptiness of the argument list
+		if (keyIngredients.isEmpty()) {
+			return new FoodSearchByIngredientResult(Collections.emptyList(), 0, 0);
+		}
 
-		// Search by the factor
+		List<FoodIndexByIngredient> foodPairsByIngre = new ArrayList<>();
+
+		// Search by the sameness factor
+		int perfectMatchCount = 0;
+		int noExtraCostCount = 0;
 		for (Food food : foods.values()) {
 			Collection<Integer> ingreIds = food.getIngredients();
 			if (!ingreIds.isEmpty()) {
 				int matched = 0;
+				int extraCost = food.getCookingCost();
 				for (Integer keyIngreId : keyIngredients) {
 					if (ingreIds.contains(keyIngreId)) {
 						matched++;
+						extraCost -= IngredientList.getInstance().get(keyIngreId).getPrice();
 					}
 				}
 
-				Double factor = Double.valueOf((double) matched / keyIngredients.size());
-				if (factor.compareTo(INGREDIENT_SEARCH_FACTOR) >= 0) {
-					foodsByIngredientPairs.add(ImmutablePair.of(factor, food));
+				double sameness = (double) matched / keyIngredients.size();
+				if (Double.compare(sameness, INGREDIENT_SEARCH_FACTOR) >= 0) {
+					foodPairsByIngre.add(new FoodIndexByIngredient(sameness, extraCost, food));
+
+					if (matched == keyIngredients.size()) {
+						perfectMatchCount++;
+						if (extraCost <= 0) {
+							noExtraCostCount++;
+						}
+					}
 				}
 			}
 		}
 
-		// Sort by the factor in descending order
-		Collections.sort(foodsByIngredientPairs, Comparator.comparing(p -> -p.getKey()));
-		
-		return foodsByIngredientPairs;
+		// Sort the result list
+		Collections.sort(foodPairsByIngre);
+
+		return new FoodSearchByIngredientResult(foodPairsByIngre, perfectMatchCount, noExtraCostCount);
 	}
 
 	public Collection<Food> filteringByName(String foodName) {
