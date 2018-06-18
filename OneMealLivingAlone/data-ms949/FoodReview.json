@@ -1,0 +1,13 @@
+[ {
+  "reviewId" : 1,
+  "userId" : "mario",
+  "foodId" : 1,
+  "grade" : 10,
+  "review" : "와 간편하기 먹기 좋네요"
+}, {
+  "reviewId" : 2,
+  "userId" : "sonic",
+  "foodId" : 1,
+  "grade" : 10,
+  "review" : "최곱니다"
+} ]

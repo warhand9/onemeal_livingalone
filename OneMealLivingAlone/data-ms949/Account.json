@@ -1,0 +1,21 @@
+[ {
+  "type" : "customer",
+  "accountId" : "wefwg",
+  "password" : "abcde!12@$#",
+  "email" : "bbb@ccc.net",
+  "personalIngredients" : [ 1, 2 ],
+  "personalFavoriteFoods" : [ 1, 2 ],
+  "personalFoodReviews" : [ 1, 2 ]
+}, {
+  "type" : "admin",
+  "accountId" : "abcde",
+  "password" : "abcde!12@$#"
+}, {
+  "type" : "customer",
+  "accountId" : "fghsl",
+  "password" : "abcde!12@$#",
+  "email" : "aaa@bbb.net",
+  "personalIngredients" : [ ],
+  "personalFavoriteFoods" : [ ],
+  "personalFoodReviews" : [ ]
+} ]
