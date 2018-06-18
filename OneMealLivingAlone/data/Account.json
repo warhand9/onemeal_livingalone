@@ -1,11 +1,11 @@
 [ {
   "type" : "customer",
-  "accountId" : "wefwg",
-  "password" : "abcde!12@$#",
+  "accountId" : "asdfg",
+  "password" : "asdf1234",
   "email" : "bbb@ccc.net",
   "personalIngredients" : [ 1, 2 ],
   "personalFavoriteFoods" : [ 1, 2 ],
-  "personalFoodReviews" : [ 1, 2 ]
+  "personalFoodReviews" : [ ]
 }, {
   "type" : "admin",
   "accountId" : "abcde",
