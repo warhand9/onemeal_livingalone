@@ -5,7 +5,7 @@
 
 	<groupId>kr.swengineering</groupId>
 	<artifactId>one-meal-living-alone</artifactId>
-	<version>0.1.0-SNAPSHOT</version>
+	<version>0.9.0-SNAPSHOT</version>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -130,6 +130,7 @@
 								</copy>
 								<copy todir="${project.build.directory}" overwrite="true">
 									<fileset dir="${project.basedir}">
+										<include name="run-omla.bat" />
 										<include name="run-omla.sh" />
 										<include name="log4j2*.xml" />
 									</fileset>
