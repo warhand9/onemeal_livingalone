@@ -187,7 +187,7 @@ public class FoodSearchByIngredientsUI extends ManagerUI {
 			System.out.println();
 		}
 
-		if (result.getPerfectMatchCount() != 0) {
+		if (result.getNoExtraCostCount() != 0) {
 			System.out.println("일치도 100%이며, 추가적인 식재료가 필요없는 요리들>>");
 			for (int i = 0; i < result.getNoExtraCostCount(); i++) {
 				FoodIndexByIngredient foodIndex = foodIndexes.get(i);
@@ -197,7 +197,7 @@ public class FoodSearchByIngredientsUI extends ManagerUI {
 			System.out.println();
 		}
 
-		if (result.getNoExtraCostCount() != result.getPerfectMatchCount()) {
+		if (result.getNoExtraCostCount() < result.getPerfectMatchCount()) {
 			System.out.println("일치도 100%이며, 추가적인 식재료가 필요한 요리들>>");
 			for (int i = result.getNoExtraCostCount(); i < result.getPerfectMatchCount(); i++) {
 				FoodIndexByIngredient foodIndex = foodIndexes.get(i);
