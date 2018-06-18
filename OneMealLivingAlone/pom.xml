@@ -124,7 +124,7 @@
 								<mkdir dir="${project.build.directory}/data" />
 								<copy todir="${project.build.directory}/data"
 									overwrite="true">
-									<fileset dir="${project.basedir}/data">
+									<fileset dir="${project.basedir}/data-ms949">
 										<include name="*.*" />
 									</fileset>
 								</copy>
