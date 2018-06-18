@@ -1,8 +1,4 @@
 [ {
-  "ingredientId" : 0,
-  "name" : "김",
-  "price" : 100
-}, {
   "ingredientId" : 1,
   "name" : "쌀",
   "price" : 1500
@@ -13,7 +9,7 @@
 }, {
   "ingredientId" : 3,
   "name" : "대파",
-  "price" : 0
+  "price" : 20
 }, {
   "ingredientId" : 4,
   "name" : "소세지",
@@ -21,15 +17,15 @@
 }, {
   "ingredientId" : 5,
   "name" : "소금",
-  "price" : 0
+  "price" : 10
 }, {
   "ingredientId" : 6,
   "name" : "토마토 케찹",
-  "price" : 0
+  "price" : 60
 }, {
   "ingredientId" : 7,
   "name" : "올리브유",
-  "price" : 0
+  "price" : 90
 }, {
   "ingredientId" : 8,
   "name" : "볼어묵",
@@ -53,11 +49,11 @@
 }, {
   "ingredientId" : 13,
   "name" : "다진 마늘",
-  "price" : 0
+  "price" : 20
 }, {
   "ingredientId" : 14,
   "name" : "다진 생강",
-  "price" : 0
+  "price" : 20
 }, {
   "ingredientId" : 15,
   "name" : "만두",
@@ -125,11 +121,11 @@
 }, {
   "ingredientId" : 31,
   "name" : "고추",
-  "price" : 0
+  "price" : 40
 }, {
   "ingredientId" : 32,
   "name" : "소면",
-  "price" : 0
+  "price" : 40
 }, {
   "ingredientId" : 33,
   "name" : "라면",
@@ -145,77 +141,77 @@
 }, {
   "ingredientId" : 36,
   "name" : "스팸",
-  "price" : 0
+  "price" : 30
 }, {
   "ingredientId" : 37,
   "name" : "오이",
-  "price" : 0
+  "price" : 30
 }, {
   "ingredientId" : 38,
   "name" : "호박",
-  "price" : 0
+  "price" : 10
 }, {
   "ingredientId" : 39,
   "name" : "새송이 버섯",
-  "price" : 0
+  "price" : 80
 }, {
   "ingredientId" : 40,
   "name" : "깻가루",
-  "price" : 0
+  "price" : 10
 }, {
   "ingredientId" : 41,
   "name" : "치킨",
-  "price" : 0
+  "price" : 600
 }, {
   "ingredientId" : 42,
   "name" : "치즈샌드크래커",
-  "price" : 0
+  "price" : 600
 }, {
   "ingredientId" : 43,
   "name" : "옥수수통조림",
-  "price" : 0
+  "price" : 500
 }, {
   "ingredientId" : 44,
   "name" : "야끼소바",
-  "price" : 0
+  "price" : 700
 }, {
   "ingredientId" : 45,
   "name" : "사우전아일랜드 드레싱",
-  "price" : 0
+  "price" : 900
 }, {
   "ingredientId" : 46,
   "name" : "또띠아",
-  "price" : 0
+  "price" : 500
 }, {
   "ingredientId" : 47,
   "name" : "닭",
-  "price" : 0
+  "price" : 700
 }, {
   "ingredientId" : 48,
   "name" : "감자",
-  "price" : 0
+  "price" : 10
 }, {
   "ingredientId" : 49,
   "name" : "미림",
-  "price" : 0
+  "price" : 600
 }, {
   "ingredientId" : 50,
   "name" : "땅콩버터",
-  "price" : 0
+  "price" : 100
 }, {
   "ingredientId" : 51,
   "name" : "피쉬소스",
-  "price" : 0
+  "price" : 700
 }, {
   "ingredientId" : 52,
   "name" : "라임쥬스",
-  "price" : 0
+  "price" : 80
 }, {
   "ingredientId" : 53,
   "name" : "땅콩",
-  "price" : 0
+  "price" : 10
 }, {
   "ingredientId" : 54,
   "name" : "스리라차 소스",
-  "price" : 0
+  "price" : 60
 } ]
