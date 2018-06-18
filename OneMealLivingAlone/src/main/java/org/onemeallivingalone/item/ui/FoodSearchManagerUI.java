@@ -20,7 +20,8 @@ public class FoodSearchManagerUI extends ManagerUI{
 		List<Food> foods = new ArrayList<Food>(FoodList.getInstance().getvalues());	// 시스템에 저장된 순서
 		int cur_page = 1;
 		int listcnt = foods.size();
-		int entire_page = (foods.size()/5==0) ? foods.size()/5 + 1 : foods.size()/5+1+1;
+		//int entire_page = (foods.size()/5==0) ? foods.size()/5 + 1 : foods.size()/5+1+1;
+		int entire_page = foods.size()/5+1;
 		
 		if(listcnt==0)
 		{

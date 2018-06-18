@@ -75,7 +75,7 @@ public class FoodSearchByIngredientsUI extends ManagerUI {
 		List<Ingredient> ingres = new ArrayList<Ingredient>(IngredientList.getInstance().getvalues());
 		int cur_page = 1;
 		int listcnt = 0;
-		int entire_page = (ingres.size() / 5 == 0) ? ingres.size() / 5 + 1 : ingres.size() / 5 + 1 + 1;
+		int entire_page = ingres.size() / 5 + 1;
 		int i;
 
 		listcnt = ingres.size();
@@ -157,6 +157,7 @@ public class FoodSearchByIngredientsUI extends ManagerUI {
 				cnt = 0;
 			}
 		}
+		System.out.println();
 		System.out.println("검색에 이용할 식재료를 선택하십시오(선택종료 : -1)");
 		while (true) {
 			System.out.print("입력(종료 : -1) : ");

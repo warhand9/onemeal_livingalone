@@ -28,7 +28,7 @@ public class FoodListManager extends ManagerUI{
 		while(true)
 		{
 			foods = new ArrayList<Food>(FoodList.getInstance().getvalues());
-			entire_page = (foods.size()/5==0) ? foods.size()/5 + 1 : foods.size()/5+1+1;
+			entire_page = foods.size()/5 + 1;
 			// 5개 출력
 			listcnt = foods.size();
 			if(listcnt==0)

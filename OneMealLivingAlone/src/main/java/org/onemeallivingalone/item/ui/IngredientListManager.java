@@ -28,7 +28,8 @@ public class IngredientListManager extends ManagerUI{
 		while(true)
 		{
 			ingres = new ArrayList<Ingredient>(IngredientList.getInstance().getvalues());
-			entire_page = (ingres.size()/5==0) ? ingres.size()/5 + 1 : ingres.size()/5+1+1;
+			//entire_page = (ingres.size()/5==0) ? ingres.size()/5 + 1 : ingres.size()/5+1+1;
+			entire_page = ingres.size()+1;
 			// 5개 출력
 			listcnt = ingres.size();
 			if(listcnt==0)

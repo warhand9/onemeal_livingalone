@@ -77,7 +77,8 @@ public class IngredientSearchManagerUI extends ManagerUI{
 		List<Ingredient> ingres = new ArrayList<Ingredient>(IngredientList.getInstance().getvalues());
 		int cur_page=1;
 		int listcnt=0;
-		int entire_page = (ingres.size()/5==0) ? ingres.size()/5 + 1 : ingres.size()/5+1+1;
+		//int entire_page = (ingres.size()/5==0) ? ingres.size()/5 + 1 : ingres.size()/5+1+1;
+		int entire_page = ingres.size()/5 + 1;
 		int i;
 		
 		while(true)

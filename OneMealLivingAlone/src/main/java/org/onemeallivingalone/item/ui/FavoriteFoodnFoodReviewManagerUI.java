@@ -293,7 +293,7 @@ public class FavoriteFoodnFoodReviewManagerUI extends ManagerUI{
 	
 	public int idValidcheck(int newfoodreviewid)
 	{
-		ArrayList<FoodReview> frs = new ArrayList<FoodReview>(FoodReviewList.getInstance().getvalues());
+		Collection<FoodReview> frs = FoodReviewList.getInstance().getvalues();
 		for(FoodReview fr : frs)
 		{
 			if(fr.getFoodId() == newfoodreviewid)
