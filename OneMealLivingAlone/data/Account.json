@@ -1,13 +1,21 @@
 [ {
   "type" : "customer",
-  "accountId" : "custom",
-  "password" : "custom2@",
+  "accountId" : "wefwg",
+  "password" : "abcde!12@$#",
+  "email" : "bbb@ccc.net",
+  "personalIngredients" : [ 200, 100 ],
+  "personalFavoriteFoods" : [ 20, 10 ],
+  "personalFoodReviews" : [ 2000, 1000 ]
+}, {
+  "type" : "admin",
+  "accountId" : "abcde",
+  "password" : "abcde!12@$#"
+}, {
+  "type" : "customer",
+  "accountId" : "fghsl",
+  "password" : "abcde!12@$#",
   "email" : "aaa@bbb.net",
   "personalIngredients" : [ ],
   "personalFavoriteFoods" : [ ],
   "personalFoodReviews" : [ ]
-}, {
-  "type" : "admin",
-  "accountId" : "admin",
-  "password" : "qwerty1!"
 } ]
