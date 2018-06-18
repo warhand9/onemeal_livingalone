@@ -45,7 +45,7 @@ public class FoodReview {
 	@JsonIgnore
 	public String getDescription() {
 		Food food = FoodList.getInstance().get(foodId);
-		return String.format("요리 이름: %d\n%s", food.getName(), getDescriptionWithoutFoodName());
+		return String.format("요리 이름: %s\n%s", food.getName(), getDescriptionWithoutFoodName());
 	}
 	
 	@JsonIgnore

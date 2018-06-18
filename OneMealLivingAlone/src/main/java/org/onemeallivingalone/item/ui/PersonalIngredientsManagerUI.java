@@ -21,17 +21,26 @@ public class PersonalIngredientsManagerUI extends ManagerUI{
 			return;
 		}
 		cusacnt = (CustomerAccount)CurrentUser.get();
-		System.out.printf("%s님의 개인 식재료 리스트>>\n", CurrentUser.get().getAccountId());
+		/*System.out.printf("%s님의 개인 식재료 리스트>>\n", CurrentUser.get().getAccountId());
 		
 		for(i=0; i<cusacnt.getPersonalIngredients().size(); i++)
 		{
 			int ingredientID = cusacnt.getPersonalIngredients().get(i);
 			System.out.println(IngredientList.getInstance().get(ingredientID).toString());
-		}
+		}*/
 		
 		while(select!=0)
 		{
 			int choose;
+			
+			System.out.printf("%s님의 개인 식재료 리스트>>\n", CurrentUser.get().getAccountId());
+			
+			for(i=0; i<cusacnt.getPersonalIngredients().size(); i++)
+			{
+				int ingredientID = cusacnt.getPersonalIngredients().get(i);
+				System.out.println("ID:" + IngredientList.getInstance().get(ingredientID).toString());
+			}
+			
 			System.out.println("기능을 선택하십시오.(1.개인식재료 추가	2.개인식재료 삭제		3.종료) : ");
 			choose = scan.nextInt();
 			switch (choose)
@@ -54,7 +63,7 @@ public class PersonalIngredientsManagerUI extends ManagerUI{
 	
 	void addPersonalIngredient()
 	{
-		System.out.println("식재료를 검색하여 추가하십시오.");
+		System.out.println("식재료를 검색기능을 통하여 개인식재료를 추가하십시오.!!");
 		new IngredientSearchManagerUI().interact();
 	}
 	

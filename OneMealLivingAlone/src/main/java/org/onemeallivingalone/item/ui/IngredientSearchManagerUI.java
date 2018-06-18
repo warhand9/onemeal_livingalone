@@ -14,6 +14,7 @@ public class IngredientSearchManagerUI extends ManagerUI{
 	
 	CustomerAccount cusacnt;
 	String ingredientName;
+	int ingredientID;
 	Ingredient searchedIngredient=null;
 	int select;
 
@@ -26,9 +27,14 @@ public class IngredientSearchManagerUI extends ManagerUI{
 			return;
 		
 		System.out.println("검색할 식재료의 이름을 입력하십시오.");
-		ingredientName = scan.next();
+		scan.nextLine();
+		ingredientName = scan.nextLine();
+		//System.out.println("검색할 식재료의 ID를 입력하십시오.");
+		//ingredientID = scan.nextInt();
 		
 		searchedIngredient = IngredientList.getInstance().searchByName(ingredientName);
+		//searchedIngredient = IngredientList.getInstance().get(ingredientID);
+		
 		System.out.println("검색결과>>");
 		if(searchedIngredient == null)
 		{
@@ -97,7 +103,7 @@ public class IngredientSearchManagerUI extends ManagerUI{
 			}
 			//
 			
-			System.out.print("(1.이전페이지		2.다음페이지	3.검색하기		4.종료)입력 : ");
+			System.out.print("(1.이전페이지    2.다음페이지    3.검색하기    4.종료)입력 : ");
 			select = scan.nextInt();
 			while(select<1 || select>4)
 			{

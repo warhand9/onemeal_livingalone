@@ -15,7 +15,8 @@ public class FoodSearchByNameUI extends ManagerUI{
 		String foodname;
 		ArrayList<Food> filteringFoods = null; 
 		System.out.print("검색하고 하는 요리 이름을 입력하십시오. : ");
-		foodname = scan.next();
+		scan.nextLine();
+		foodname = scan.nextLine();
 		
 		filteringFoods=(ArrayList<Food>)FoodList.getInstance().filteringByName(foodname);
 		

@@ -44,7 +44,7 @@ public class Ingredient {
 
 	@JsonIgnore
 	public String getDescription() {
-		return String.format("%s(%d 원)", name, price);
+		return String.format("ID:%d %s(%d 원)", ingredientId, name, price);
 	}
 
 	public int getIngredientId() {
