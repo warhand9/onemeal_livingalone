@@ -3,9 +3,9 @@
   "accountId" : "wefwg",
   "password" : "abcde!12@$#",
   "email" : "bbb@ccc.net",
-  "personalIngredients" : [ 200, 100 ],
-  "personalFavoriteFoods" : [ 20, 10 ],
-  "personalFoodReviews" : [ 2000, 1000 ]
+  "personalIngredients" : [ 1, 2 ],
+  "personalFavoriteFoods" : [ 1, 2 ],
+  "personalFoodReviews" : [ 1, 2 ]
 }, {
   "type" : "admin",
   "accountId" : "abcde",

@@ -1,7 +1,7 @@
 [ {
   "ingredientId" : 0,
-  "name" : " ",
-  "price" : 0
+  "name" : "김",
+  "price" : 100
 }, {
   "ingredientId" : 1,
   "name" : "쌀",
