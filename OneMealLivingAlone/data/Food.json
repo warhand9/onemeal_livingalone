@@ -5,8 +5,8 @@
   "recipe" : "펜에 올리브유를 뿌리고 살짝 달궈준 뒤 파를 볶아 주고 계란 스크램블을 만들어 준다. 밥을 넣어주고 소금넣고 같이 볶아준다음 소시지와 함께 볶는다. 기호에 따라 캐첩을 뿌려 먹는다.",
   "cookingCost" : 2500,
   "ingredients" : [ 1, 2, 3, 4, 5, 6 ],
-  "averageGrade" : 10.0,
-  "reviews" : [ 1, 2 ]
+  "averageGrade" : 0.0,
+  "reviews" : [ ]
 }, {
   "foodId" : 2,
   "name" : "어묵볶음",
