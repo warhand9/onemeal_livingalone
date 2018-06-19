@@ -131,7 +131,7 @@
 								<copy todir="${project.build.directory}" overwrite="true">
 									<fileset dir="${project.basedir}">
 										<include name="run-omla.bat" />
-										<include name="run-omla.sh" />
+										<!-- <include name="run-omla.sh" /> -->
 										<include name="log4j2*.xml" />
 									</fileset>
 								</copy>
