@@ -139,9 +139,9 @@ public class SystemAccountManagerUI extends ManagerUI{
 		{
 			// 변경된 값 적용
 			list = new ArrayList<Account>(AccountList.getValues());
-			entire_page = (list.size()/10 == 0) ? list.size()/10 +1: list.size()/10 + 1 +1;
+			entire_page = (list.size()%10 == 0) ? list.size()/10 : list.size()/10 + 1;
 			listcnt = list.size();
-			
+			System.out.println(cur_page);
 			System.out.println("<계정 목록>");
 			for(i=0; i < 10; i++)
 			{

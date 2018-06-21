@@ -33,33 +33,41 @@ public class MainMenuManagerUI extends ManagerUI {
 			case 1:
 				LoginMenuManagerUI account = new LoginMenuManagerUI();
 				account.interact();
+				System.out.println("\n");
 				break;
 			case 2:
 				IngredientSearchManagerUI ingredientSearch = new IngredientSearchManagerUI();
 				ingredientSearch.interact();
+				System.out.println("\n");
 				break;
 			case 3:
 				FoodSearchManagerUI foodSearch = new FoodSearchManagerUI();
 				foodSearch.interact();
+				System.out.println("\n");
 				break;
 			case 4:
 				PersonalIngredientsManagerUI personalIngredientSearch = new PersonalIngredientsManagerUI();
 				personalIngredientSearch.interact();
+				System.out.println("\n");
 				break;
 			case 5:
 				FavoriteFoodnFoodReviewManagerUI favoriteFoodnReviewMenu = new FavoriteFoodnFoodReviewManagerUI();
 				favoriteFoodnReviewMenu.interact();
+				System.out.println("\n");
 				break;
 			case 6:
 				SystemAccountManagerUI systemAcc = new SystemAccountManagerUI();
 				systemAcc.interact();
+				System.out.println("\n");
 				break;
 			case 7:
 				ItemListMenuManagerUI itemListMenu = new ItemListMenuManagerUI();
 				itemListMenu.interact();
+				System.out.println("\n");
 				break;
 			default:
 				System.out.println("알 수 없는 명령어입니다.");
+				System.out.println("\n");
 				break;
 			case 0: // 종료
 				break;

@@ -15,7 +15,7 @@ public class FoodSearchByIngredientsUI extends ManagerUI {
 	CustomerAccount cusacnt;
 	ArrayList<Integer> ingredientsForSearch = new ArrayList<Integer>();
 	int ingredientID;
-	// ArrayList<Food> searchedFood;
+	int flag=0;
 
 	@Override
 	public void interact() {
@@ -31,18 +31,24 @@ public class FoodSearchByIngredientsUI extends ManagerUI {
 		}
 		switch (select1) {
 		case 1:
+			System.out.println();
 			getIngredientsForSearchBySearching();
+			System.out.println();
 			break;
 		case 2:
+			System.out.println();
 			getIngredientsForSearchByPersonalIngredients();
+			System.out.println();
 			break;
 		case 3:
 			return;
 
 		}
 
-		if (ingredientsForSearch == null) {
-			System.out.println("선택된 재료들이 없습니다.");
+		if (ingredientsForSearch == null || flag==1) {
+			if(flag==0)
+				System.out.println("선택된 재료들이 없습니다.");
+			System.out.println();
 			return;
 		}
 
@@ -58,10 +64,8 @@ public class FoodSearchByIngredientsUI extends ManagerUI {
 			}
 		}
 		System.out.print("\n위의 재료들로 검색한 결과>>\n");
-		// searchedFood =
-		// (ArrayList<Food>)FoodList.getInstance().filteringByIngredients(ingredientsForSearch);
 
-		// 결과 출력 // 복잡한 부분
+		// 결과 출력
 		showResultOfSearchByIngredients();
 
 		new FoodViewUI().interact();
@@ -92,7 +96,7 @@ public class FoodSearchByIngredientsUI extends ManagerUI {
 				if (((cur_page - 1) * 5 + i) >= listcnt)
 					break;
 
-				System.out.printf("%d. ", i + 1);
+				//System.out.printf("%d. ", i + 1);
 				System.out.println(ingres.get((cur_page - 1) * 5 + i).getDescription());
 			}
 			//
@@ -119,7 +123,7 @@ public class FoodSearchByIngredientsUI extends ManagerUI {
 				break;
 
 			case 3:
-				System.out.print("식재료 번호를 입력하십시오 : ");
+				System.out.print("식재료 ID를 입력하십시오 : ");
 				ingredientID = scan.nextInt();
 				if (IngredientList.getInstance().get(ingredientID) == null)
 					System.out.println("선택하신 식재료가 없습니다.");
@@ -143,6 +147,7 @@ public class FoodSearchByIngredientsUI extends ManagerUI {
 
 		if (CurrentUser.get() == null || CurrentUser.get() instanceof AdminAccount) {
 			System.out.println("이용자 계정 로그인이 필요한 서비스 입니다.");
+			flag = 1;
 			return;
 		}
 		cusacnt = (CustomerAccount) CurrentUser.get();
@@ -158,7 +163,7 @@ public class FoodSearchByIngredientsUI extends ManagerUI {
 			}
 		}
 		System.out.println();
-		System.out.println("검색에 이용할 식재료를 선택하십시오(선택종료 : -1)");
+		System.out.println("검색에 이용할 식재료번호를 선택하십시오(선택종료 : -1)");
 		while (true) {
 			System.out.print("입력(종료 : -1) : ");
 			ingredientID = scan.nextInt();
@@ -191,7 +196,7 @@ public class FoodSearchByIngredientsUI extends ManagerUI {
 			System.out.println("일치도 100%이며, 추가적인 식재료가 필요없는 요리들>>");
 			for (int i = 0; i < result.getNoExtraCostCount(); i++) {
 				FoodIndexByIngredient foodIndex = foodIndexes.get(i);
-				System.out.printf("%2d. %s\n  추가 비용: %d\n", i, foodIndex.getFood().getSummaryDescription(),
+				System.out.printf("%s\n  추가 비용: %d\n", foodIndex.getFood().getSummaryDescription(),
 						foodIndex.getExtraCost());
 			}
 			System.out.println();
@@ -201,7 +206,7 @@ public class FoodSearchByIngredientsUI extends ManagerUI {
 			System.out.println("일치도 100%이며, 추가적인 식재료가 필요한 요리들>>");
 			for (int i = result.getNoExtraCostCount(); i < result.getPerfectMatchCount(); i++) {
 				FoodIndexByIngredient foodIndex = foodIndexes.get(i);
-				System.out.printf("%2d. %s\n  추가 비용: %d\n", i, foodIndex.getFood().getSummaryDescription(),
+				System.out.printf("%s\n  추가 비용: %d\n", foodIndex.getFood().getSummaryDescription(),
 						foodIndex.getExtraCost());
 			}
 			System.out.println();
@@ -211,7 +216,7 @@ public class FoodSearchByIngredientsUI extends ManagerUI {
 			System.out.println("일치도가 낮은 요리들>>");
 			for (int i = result.getPerfectMatchCount(); i < foodIndexes.size(); i++) {
 				FoodIndexByIngredient foodIndex = foodIndexes.get(i);
-				System.out.printf("%2d. %s\n  일치도: %2.1f%% / 추가 비용: %d\n", i,
+				System.out.printf("%s\n  일치도: %2.1f%% / 추가 비용: %d\n",
 						foodIndex.getFood().getSummaryDescription(),
 						foodIndex.getSameness() * 100, foodIndex.getExtraCost());
 			}

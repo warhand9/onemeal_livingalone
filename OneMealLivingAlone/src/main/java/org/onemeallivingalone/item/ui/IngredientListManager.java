@@ -16,11 +16,9 @@ public class IngredientListManager extends ManagerUI{
 
 	@Override
 	public void interact() {
-		//List<Ingredient> ingres = new ArrayList<Ingredient>(IngredientList.getInstance().getvalues());
 		List<Ingredient> ingres;
 		int cur_page=1;
 		int listcnt=0;
-		//int entire_page = (ingres.size()/5==0) ? ingres.size()/5 + 1 : ingres.size()/5+1+1;
 		int entire_page;
 		int i;
 		int select;
@@ -28,8 +26,8 @@ public class IngredientListManager extends ManagerUI{
 		while(true)
 		{
 			ingres = new ArrayList<Ingredient>(IngredientList.getInstance().getvalues());
-			//entire_page = (ingres.size()/5==0) ? ingres.size()/5 + 1 : ingres.size()/5+1+1;
-			entire_page = ingres.size()+1;
+			entire_page = (ingres.size()%5==0) ? ingres.size()/5 : ingres.size()/5+1;
+			
 			// 5개 출력
 			listcnt = ingres.size();
 			if(listcnt==0)
@@ -44,7 +42,7 @@ public class IngredientListManager extends ManagerUI{
 					if(((cur_page-1)*5 + i)>=listcnt)
 						break;
 					
-					System.out.printf("%d. ",i+1);
+					//System.out.printf("%d. ",i+1);
 					System.out.print(ingres.get((cur_page-1)*5+i).getDescription());
 					System.out.println(" ID : " + ingres.get((cur_page-1)*5+i).getIngredientId());
 				}
@@ -65,21 +63,26 @@ public class IngredientListManager extends ManagerUI{
 					System.out.println("현재 페이지가 처음 페이지입니다.");
 				else
 					cur_page--;
+				System.out.println();
 				break;
 			case 2:
 				if(cur_page == entire_page)
 					System.out.println("현재 페이지가 마지막 페이지입니다.");
 				else
 					cur_page++;
+				System.out.println();
 				break;
 			case 3:
 				addIngredient();
+				System.out.println();
 				break;
 			case 4:
 				modifyIngredient();
+				System.out.println();
 				break;
 			case 5:
 				deleteIngredient();
+				System.out.println();
 				break;
 			case 6:
 				return;
@@ -151,7 +154,6 @@ public class IngredientListManager extends ManagerUI{
 	public void deleteIngredient()
 	{
 		int ingreId;
-		int i;
 		CustomerAccount cus;
 		
 		System.out.println("식재료 삭제>>");

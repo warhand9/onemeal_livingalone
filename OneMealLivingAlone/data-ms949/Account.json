@@ -3,12 +3,12 @@
   "accountId" : "customer1",
   "password" : "customer1234",
   "email" : "bbb@ccc.net",
-  "personalIngredients" : [ 1, 2 ],
-  "personalFavoriteFoods" : [ 1, 2 ],
+  "personalIngredients" : [ 1, 2, 3, 4, 6, 7, 11, 12 ],
+  "personalFavoriteFoods" : [ 1, 2, 5, 6, 8 ],
   "personalFoodReviews" : [ ]
 }, {
   "type" : "admin",
-  "accountId" : "abcde",
+  "accountId" : "admin",
   "password" : "admin1234"
 }, {
   "type" : "customer",

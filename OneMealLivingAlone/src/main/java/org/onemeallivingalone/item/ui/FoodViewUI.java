@@ -15,13 +15,15 @@ public class FoodViewUI extends ManagerUI{
 	public void interact() {
 		int foodID, select;
 		Food food;
-		System.out.print("보고자하는 요리 번호를 입력하십시오 : ");
+		System.out.print("보고자하는 요리 번호를 입력하십시오(종료 : 0) : ");
 		foodID = scan.nextInt();
+		if(foodID == 0)
+			return;
 
 		while((food = FoodList.getInstance().get(foodID))==null)
 		{
 			System.out.println("해당 요리가 없습니다.");
-			System.out.print("다시선택하십시오(종료 : -1) : ");
+			System.out.print("다시선택하십시오(종료 : 0) : ");
 			foodID = scan.nextInt();
 			if(foodID == -1)
 				return;
@@ -53,7 +55,6 @@ public class FoodViewUI extends ManagerUI{
 				System.out.println("이미 관심 요리 목록에 존재합니다.");
 				return;
 			}
-			
 			cusacnt.addPeronsalFavoriteFood(foodID);
 			System.out.println("관심 요리로 추가되었습니다.");
 		}

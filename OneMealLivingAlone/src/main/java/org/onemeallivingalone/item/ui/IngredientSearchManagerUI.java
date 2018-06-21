@@ -29,11 +29,8 @@ public class IngredientSearchManagerUI extends ManagerUI{
 		System.out.println("검색할 식재료의 이름을 입력하십시오.");
 		scan.nextLine();
 		ingredientName = scan.nextLine();
-		//System.out.println("검색할 식재료의 ID를 입력하십시오.");
-		//ingredientID = scan.nextInt();
 		
 		searchedIngredient = IngredientList.getInstance().searchByName(ingredientName);
-		//searchedIngredient = IngredientList.getInstance().get(ingredientID);
 		
 		System.out.println("검색결과>>");
 		if(searchedIngredient == null)
@@ -59,8 +56,13 @@ public class IngredientSearchManagerUI extends ManagerUI{
 				return;
 			}
 			cusacnt = (CustomerAccount)CurrentUser.get();
-			cusacnt.addPersonalIngredient(searchedIngredient.getIngredientId());
-			System.out.println(searchedIngredient.getName() +"이(가) 개인 식재료 리스트에 추가 되었습니다.");
+			if(cusacnt.getPersonalIngredients().contains(searchedIngredient.getIngredientId()))
+				System.out.println("이미 개인 식재료 리스트에 존재합니다.");
+			else
+			{
+				cusacnt.addPersonalIngredient(searchedIngredient.getIngredientId());
+				System.out.println(searchedIngredient.getName() +"이(가) 개인 식재료 리스트에 추가 되었습니다.");
+			}
 		}
 		
 		return;
@@ -68,24 +70,16 @@ public class IngredientSearchManagerUI extends ManagerUI{
 	
 	public void showAllIngredients()
 	{
-		/*for(Ingredient ingredient : IngredientList.getvalues())
-		{
-			System.out.println(ingredient.getDescription());
-		}*/
-		
 		//
 		List<Ingredient> ingres = new ArrayList<Ingredient>(IngredientList.getInstance().getvalues());
 		int cur_page=1;
 		int listcnt=0;
-		//int entire_page = (ingres.size()/5==0) ? ingres.size()/5 + 1 : ingres.size()/5+1+1;
-		int entire_page = ingres.size()/5 + 1;
+		int entire_page = (ingres.size()%5==0) ? ingres.size()/5 : ingres.size()/5+1;
 		int i;
 		
 		while(true)
 		{
 			// 5개 출력
-			//ingres = new ArrayList<Ingredient>(IngredientList.getInstance().getvalues());
-			//entire_page = (ingres.size()/5==0) ? ingres.size()/5 + 1 : ingres.size()/5+1+1;
 			listcnt = ingres.size();
 			if(listcnt==0)
 			{
@@ -118,6 +112,7 @@ public class IngredientSearchManagerUI extends ManagerUI{
 					System.out.println("현재 페이지가 처음 페이지입니다.");
 				else
 					cur_page--;
+				System.out.println("\n");
 				break;
 				
 			case 2:
@@ -125,6 +120,7 @@ public class IngredientSearchManagerUI extends ManagerUI{
 					System.out.println("현재 페이지가 마지막 페이지입니다.");
 				else
 					cur_page++;
+				System.out.println("\n");
 				break;
 			case 3:
 				return;

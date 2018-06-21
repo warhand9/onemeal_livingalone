@@ -1,20 +1,13 @@
 package org.onemeallivingalone.item.ui;
 
-import org.onemeallivingalone.account.AdminAccount;
 import org.onemeallivingalone.account.CustomerAccount;
-import org.onemeallivingalone.account.ui.LoginMenuManagerUI;
-import org.onemeallivingalone.account.ui.SystemAccountManagerUI;
 import org.onemeallivingalone.center.CurrentUser;
 import org.onemeallivingalone.center.ui.ManagerUI;
-import java.util.Scanner;
-import java.util.Vector;
-import org.onemeallivingalone.item.Food;
 
 public class ItemListMenuManagerUI extends ManagerUI{
 
 	@Override
 	public void interact() {
-		int i;
 		int order = -1;
 		
 		if(CurrentUser.get()==null || CurrentUser.get() instanceof CustomerAccount)
@@ -34,14 +27,17 @@ public class ItemListMenuManagerUI extends ManagerUI{
 			switch(order) {
 			case 1:
 				new IngredientListManager().interact();
+				System.out.println("\n");
 				break;
 			case 2:
 				new FoodListManager().interact();
+				System.out.println("\n");
 				break;
 			case 3:
 				return;
 			default:
 				System.out.println("알 수 없는 명령어입니다.");
+				System.out.println("\n");
 				break;
 			}
 		}

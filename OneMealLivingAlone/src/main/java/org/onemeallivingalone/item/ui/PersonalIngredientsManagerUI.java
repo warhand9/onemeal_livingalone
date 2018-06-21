@@ -21,13 +21,6 @@ public class PersonalIngredientsManagerUI extends ManagerUI{
 			return;
 		}
 		cusacnt = (CustomerAccount)CurrentUser.get();
-		/*System.out.printf("%s님의 개인 식재료 리스트>>\n", CurrentUser.get().getAccountId());
-		
-		for(i=0; i<cusacnt.getPersonalIngredients().size(); i++)
-		{
-			int ingredientID = cusacnt.getPersonalIngredients().get(i);
-			System.out.println(IngredientList.getInstance().get(ingredientID).toString());
-		}*/
 		
 		while(select!=0)
 		{
@@ -47,15 +40,18 @@ public class PersonalIngredientsManagerUI extends ManagerUI{
 			{
 			case 1:
 				addPersonalIngredient();
+				System.out.println("\n");
 				break;
 			case 2:
 				removePersonalIngredient();
+				System.out.println("\n");
 				break;
 			case 3:
 				return;
 				
 			default:
 				System.out.println("알 수 없는 명령어입니다.");
+				System.out.println("\n");
 				break;
 			}
 		}

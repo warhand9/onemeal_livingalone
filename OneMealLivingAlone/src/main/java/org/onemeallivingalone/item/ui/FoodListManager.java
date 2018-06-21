@@ -1,6 +1,7 @@
 package org.onemeallivingalone.item.ui;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.onemeallivingalone.account.Account;
@@ -73,12 +74,15 @@ public class FoodListManager extends ManagerUI{
 				break;
 			case 3:
 				addFood();
+				System.out.println();
 				break;
 			case 4:
 				modifyFood();
+				System.out.println();
 				break;
 			case 5:
 				deleteFood();
+				System.out.println();
 				break;
 			case 6:
 				return;
@@ -145,6 +149,7 @@ public class FoodListManager extends ManagerUI{
 		}*/
 		inputIngredientsInfo(food);
 		System.out.println("재료정보 입력 완료");
+		food.recalculateCookingCost();
 		
 		System.out.println("새로운 요리>");
 		System.out.println(food.getDetailedDescription());
@@ -201,6 +206,7 @@ public class FoodListManager extends ManagerUI{
 					//System.out.println("새로운 식재료들을 입력하십시오.");
 					food.getIngredients().clear();
 					inputIngredientsInfo(food);
+					food.recalculateCookingCost();
 					break;
 				case 4:
 					flag = 0;
@@ -217,7 +223,6 @@ public class FoodListManager extends ManagerUI{
 	{
 		CustomerAccount cus;
 		int foodId;
-		//int i;
 		int foodReviewId;
 		FoodReview foodReview;
 		
@@ -275,7 +280,8 @@ public class FoodListManager extends ManagerUI{
 	
 	Ingredient ingredientNameValidCheck(String ingreName)
 	{
-		for(Ingredient ingre : IngredientList.getInstance().getvalues())
+		Collection<Ingredient> ingres = IngredientList.getInstance().getvalues();
+		for(Ingredient ingre : ingres)
 		{
 			if(ingre.getName().equals(ingreName))
 				return ingre;
@@ -303,6 +309,7 @@ public class FoodListManager extends ManagerUI{
 		while(true)
 		{
 			System.out.printf("재료 %d : ", i);
+			//scan.nextLine();
 			ingreName = scan.next();
 			if(ingreName.equals("q"))
 				break;
